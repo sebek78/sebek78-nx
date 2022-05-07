@@ -1,0 +1,27 @@
+{
+  "sourceRoot": "apps/stock-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/stock-e2e/cypress.json",
+        "devServerTarget": "stock:serve:development"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "stock:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/stock-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["stock"]
+}

@@ -1,0 +1,79 @@
+{
+  "sourceRoot": "apps/stock/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/stock",
+        "index": "apps/stock/src/index.html",
+        "baseHref": "/",
+        "main": "apps/stock/src/main.tsx",
+        "polyfills": "apps/stock/src/polyfills.ts",
+        "tsConfig": "apps/stock/tsconfig.app.json",
+        "assets": ["apps/stock/src/favicon.ico", "apps/stock/src/assets"],
+        "styles": [],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/stock/src/environments/environment.ts",
+              "with": "apps/stock/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "stock:build",
+        "hmr": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "stock:build:development"
+        },
+        "production": {
+          "buildTarget": "stock:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/stock/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/stock"],
+      "options": {
+        "jestConfig": "apps/stock/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

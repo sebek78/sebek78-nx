@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "projects": {
+    "stock": "apps/stock",
+    "stock-e2e": "apps/stock-e2e"
+  }
+}
