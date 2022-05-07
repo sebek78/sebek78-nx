@@ -8,17 +8,17 @@ datasource db {
 }
 
 model Country {
-  id   Int    @default(autoincrement()) @id
+  id   Int    @id @default(autoincrement())
   name String @unique
 }
 
 model Province {
-  id   Int    @default(autoincrement()) @id
+  id   Int    @id @default(autoincrement())
   name String @unique
 }
 
 model User {
-  id            Int       @default(autoincrement()) @id
+  id            Int       @id @default(autoincrement())
   role          String
   username      String    @unique
   password      String
