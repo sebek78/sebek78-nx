@@ -47,7 +47,8 @@
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "stock:build",
-        "hmr": true
+        "hmr": true,
+        "proxyConfig": "apps/stock/proxy.conf.json"
       },
       "configurations": {
         "development": {

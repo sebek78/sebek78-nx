@@ -2,6 +2,7 @@
   "version": 2,
   "projects": {
     "stock": "apps/stock",
+    "stock-api": "apps/stock-api",
     "stock-e2e": "apps/stock-e2e"
   }
 }
