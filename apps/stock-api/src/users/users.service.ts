@@ -6,7 +6,6 @@ import { PrismaService } from '../prisma/prisma.service';
 import { Prisma } from '@prisma/client';
 
 const saltOrRounds = 10; // bcrypt
-const defaultRole = ['user'].toString();
 
 @Injectable()
 export class UsersService {
@@ -20,16 +19,12 @@ export class UsersService {
     const data: Prisma.UserCreateInput = {
       username: createUserDto.username,
       password: hashedPassword,
-      role: defaultRole,
-      create_on: new Date(),
+      createOn: new Date(),
     };
 
-    const {
-      id,
-      role,
-      username,
-      refresh_token: refreshToken,
-    } = await this.prisma.user.create({ data });
+    const { id, role, username, refreshToken } = await this.prisma.user.create({
+      data,
+    });
 
     // TODO: return data
     console.log(id, role, username, refreshToken);

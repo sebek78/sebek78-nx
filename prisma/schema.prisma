@@ -7,22 +7,33 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  USER
+  ADMIN
+}
+
 model Country {
   id   Int    @id @default(autoincrement())
   name String @unique
+
+  @@map("countries")
 }
 
 model Province {
   id   Int    @id @default(autoincrement())
   name String @unique
+
+  @@map("provinces")
 }
 
 model User {
-  id            Int       @id @default(autoincrement())
-  role          String
-  username      String    @unique
-  password      String
-  create_on     DateTime
-  last_login    DateTime?
-  refresh_token String?
+  id           Int       @id @default(autoincrement())
+  username     String    @unique
+  role         Role?     @default(USER)
+  password     String
+  createOn     DateTime  @map("create_on")
+  lastLogin    DateTime? @map("last_login")
+  refreshToken String?   @map("refresh_token")
+
+  @@map("users")
 }
