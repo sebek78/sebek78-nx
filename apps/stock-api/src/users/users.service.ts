@@ -32,6 +32,14 @@ export class UsersService {
     return 'This action adds a new user';
   }
 
+  async findOneByName(username: string) {
+    return this.prisma.user.findUnique({
+      where: {
+        username,
+      },
+    });
+  }
+
   findAll() {
     return `This action returns all users`;
   }
