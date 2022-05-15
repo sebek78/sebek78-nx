@@ -15,14 +15,13 @@ export class AuthService {
 
   async validateUser(username: string, password: string): Promise<UserData> {
     const user = await this.usersService.findOneByName(username);
-
     let isPasswordMatching = false;
+
     if (user) {
       isPasswordMatching = await bcrypt.compare(password, user.password);
 
       if (isPasswordMatching) {
         const { id, username, role } = user;
-
         return { id, username, role };
       }
     }
@@ -30,11 +29,9 @@ export class AuthService {
     return null;
   }
 
-  async login(user: UserData) {
+  async getJwtToken(user: UserData) {
     const payload = { ...user };
 
-    return {
-      token: this.jwtService.sign(payload),
-    };
+    return this.jwtService.sign(payload);
   }
 }

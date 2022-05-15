@@ -1,9 +1,10 @@
 import * as bcrypt from 'bcrypt';
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import { Prisma } from '@prisma/client';
+import { ErrorMessages, PrismaErrors } from '../prisma/prisma-helpers';
 
 const saltOrRounds = 10; // bcrypt
 
@@ -21,15 +22,26 @@ export class UsersService {
       password: hashedPassword,
       createOn: new Date(),
     };
+    try {
+      const { username } = await this.prisma.user.create({
+        data,
+      });
 
-    const { id, role, username, refreshToken } = await this.prisma.user.create({
-      data,
-    });
-
-    // TODO: return data
-    console.log(id, role, username, refreshToken);
-
-    return 'This action adds a new user';
+      return {
+        username,
+      };
+    } catch (error) {
+      if (error?.code === PrismaErrors.UniqueConstraintFailed) {
+        throw new HttpException(
+          ErrorMessages[PrismaErrors.UniqueConstraintFailed],
+          HttpStatus.BAD_REQUEST
+        );
+      }
+      throw new HttpException(
+        'Błąd serwera.',
+        HttpStatus.INTERNAL_SERVER_ERROR
+      );
+    }
   }
 
   async findOneByName(username: string) {

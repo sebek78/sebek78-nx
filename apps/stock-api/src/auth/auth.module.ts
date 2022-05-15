@@ -6,6 +6,8 @@ import { LocalStrategy } from './local.strategy';
 import { JwtStrategy } from './jwt.strategy';
 import { JwtModule } from '@nestjs/jwt';
 
+export const EXPIRES_IN = 15;
+
 @Module({
   imports: [
     UsersModule,
@@ -13,7 +15,7 @@ import { JwtModule } from '@nestjs/jwt';
     JwtModule.register({
       secret: process.env.JWT_SECRET,
       signOptions: {
-        expiresIn: '3600s',
+        expiresIn: `${EXPIRES_IN}s`,
       },
     }),
   ],
