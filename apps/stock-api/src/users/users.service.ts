@@ -1,7 +1,7 @@
 import * as bcrypt from 'bcrypt';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { UpdateRefreshToken, UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import { Prisma } from '@prisma/client';
 import { ErrorMessages, PrismaErrors } from '../prisma/prisma-helpers';
@@ -48,6 +48,17 @@ export class UsersService {
     return this.prisma.user.findUnique({
       where: {
         username,
+      },
+    });
+  }
+
+  async updateRefreshToken(id: number, updateUserDto: UpdateRefreshToken) {
+    return this.prisma.user.update({
+      where: {
+        id,
+      },
+      data: {
+        refreshToken: updateUserDto.refreshToken,
       },
     });
   }

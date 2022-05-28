@@ -24,11 +24,11 @@ export class AppController {
   ) {
     const { user } = req;
     const accessToken = await this.authService.getJwtToken(user);
+    const refreshToken = await this.authService.getRefreshToken(user.id);
 
     const secretData = {
       accessToken,
-      // TODO: refreshToken
-      refreshToken: '',
+      refreshToken,
     };
 
     response.cookie('tokens', secretData, { httpOnly: true });
