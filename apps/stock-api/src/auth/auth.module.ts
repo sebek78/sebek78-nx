@@ -5,8 +5,10 @@ import { PassportModule } from '@nestjs/passport';
 import { LocalStrategy } from './local.strategy';
 import { JwtStrategy } from './jwt.strategy';
 import { JwtModule } from '@nestjs/jwt';
+import { RefreshStrategy } from './refresh.strategy';
 
-export const EXPIRES_IN = 15;
+export const EXPIRES_IN = 900;
+export const REFRESH_TIME = 28800;
 
 @Module({
   imports: [
@@ -19,7 +21,7 @@ export const EXPIRES_IN = 15;
       },
     }),
   ],
-  providers: [AuthService, LocalStrategy, JwtStrategy],
+  providers: [AuthService, LocalStrategy, JwtStrategy, RefreshStrategy],
   exports: [AuthService],
 })
 export class AuthModule {}

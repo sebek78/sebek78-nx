@@ -4,14 +4,14 @@ import { Injectable } from '@nestjs/common';
 import { Request } from 'express';
 
 @Injectable()
-export class JwtStrategy extends PassportStrategy(Strategy) {
+export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
   constructor() {
     super({
       jwtFromRequest: ExtractJwt.fromExtractors([
         (request: Request) => {
-          const tokens = request?.cookies?.tokens;
-          if (!tokens) return null;
-          return tokens.accessToken;
+          const token = request?.cookies?.Authentication;
+          if (!token) return null;
+          return token;
         },
       ]),
       ignoreExpiration: false,

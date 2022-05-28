@@ -4,6 +4,7 @@ import { LocalAuthGuard } from '../auth/local-auth-guard';
 import { AuthService, UserData } from '../auth/auth.service';
 import { AppService } from './app.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { JwtRefreshGuard } from '../auth/refresh-auth-guard';
 
 interface RequestWithUser extends Request {
   user: UserData;
@@ -23,15 +24,9 @@ export class AppController {
     @Res({ passthrough: true }) response: Response
   ) {
     const { user } = req;
-    const accessToken = await this.authService.getJwtToken(user);
-    const refreshToken = await this.authService.getRefreshToken(user.id);
+    const tokens = await this.authService.createTokens(user);
 
-    const secretData = {
-      accessToken,
-      refreshToken,
-    };
-
-    response.cookie('tokens', secretData, { httpOnly: true });
+    response.setHeader('Set-Cookie', tokens);
     return { user };
   }
 
@@ -43,6 +38,19 @@ export class AppController {
     return {
       success: true,
     };
+  }
+
+  @UseGuards(JwtRefreshGuard)
+  @Get('auth/refresh-tokens')
+  async regenerateTokens(
+    @Req() req: RequestWithUser,
+    @Res({ passthrough: true }) response: Response
+  ) {
+    const { user } = req;
+    const tokens = await this.authService.createTokens(user);
+
+    response.setHeader('Set-Cookie', tokens);
+    return { user };
   }
 
   @UseGuards(JwtAuthGuard)
