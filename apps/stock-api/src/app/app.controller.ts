@@ -25,7 +25,7 @@ export class AppController {
     @Res({ passthrough: true }) response: Response
   ) {
     const { user } = req;
-    const tokens = await this.authService.createTokens(user);
+    const tokens = await this.authService.createTokens(user, true);
 
     response.setHeader('Set-Cookie', tokens);
     return { user };
@@ -48,7 +48,7 @@ export class AppController {
     @Res({ passthrough: true }) response: Response
   ) {
     const { user } = req;
-    const tokens = await this.authService.createTokens(user);
+    const tokens = await this.authService.createTokens(user, false);
 
     response.setHeader('Set-Cookie', tokens);
     return { user };

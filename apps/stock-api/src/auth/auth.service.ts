@@ -47,7 +47,7 @@ export class AuthService {
     return this.jwtService.sign(payload);
   }
 
-  async getRefreshToken(userId: number) {
+  async getRefreshToken(userId: number, isLogin: boolean) {
     const payload = {
       refreshToken: generateRandomString(16),
     };
@@ -58,18 +58,19 @@ export class AuthService {
 
     const eightHours = Date.now() + 8 * 60 * 60 * 1000;
     const userDataToUpdate: UpdateRefreshToken = {
-      // TODO: update last login
       refreshToken: token,
       refreshExpiresIn: new Date(eightHours),
     };
+
+    if (isLogin) userDataToUpdate.lastLogin = new Date();
 
     await this.usersService.updateRefreshToken(userId, userDataToUpdate);
     return userDataToUpdate.refreshToken;
   }
 
-  async createTokens(user: UserData) {
+  async createTokens(user: UserData, isLogin: boolean) {
     const accessToken = await this.getJwtToken(user);
-    const refreshToken = await this.getRefreshToken(user.id);
+    const refreshToken = await this.getRefreshToken(user.id, isLogin);
 
     const authCookie = `Authentication=${accessToken}; HttpOnly; Path=/; Max-Age=${EXPIRES_IN}`;
     const refreshCookie = `Refresh=${refreshToken}; HttpOnly; Path=/; Max-Age=${REFRESH_TIME}`;

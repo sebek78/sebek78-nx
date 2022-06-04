@@ -53,7 +53,7 @@ export class UsersService {
   }
 
   async updateRefreshToken(id: number, updateUserDto: UpdateRefreshToken) {
-    return this.prisma.user.update({
+    const query: Prisma.UserUpdateArgs = {
       where: {
         id,
       },
@@ -61,7 +61,11 @@ export class UsersService {
         refreshToken: updateUserDto.refreshToken,
         refreshExpiresIn: updateUserDto.refreshExpiresIn,
       },
-    });
+    };
+
+    if (updateUserDto.lastLogin) query.data.lastLogin = updateUserDto.lastLogin;
+
+    return this.prisma.user.update(query);
   }
 
   findAll() {
