@@ -68,6 +68,18 @@ export class UsersService {
     return this.prisma.user.update(query);
   }
 
+  async removeRefreshToken(id: number) {
+    return this.prisma.user.update({
+      where: {
+        id,
+      },
+      data: {
+        refreshToken: null,
+        refreshExpiresIn: null,
+      },
+    });
+  }
+
   findAll() {
     return `This action returns all users`;
   }
@@ -79,9 +91,5 @@ export class UsersService {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   update(id: number, updateUserDto: UpdateUserDto) {
     return `This action updates a #${id} user`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} user`;
   }
 }

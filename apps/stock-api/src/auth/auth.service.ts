@@ -77,4 +77,12 @@ export class AuthService {
 
     return [authCookie, refreshCookie];
   }
+
+  async createLogoutCookie(id: number) {
+    await this.usersService.removeRefreshToken(id);
+    return [
+      'Authentication=; HttpOnly; Path=/; Max-Age=0',
+      'Refresh=; HttpOnly; Path=/; Max-Age=0',
+    ];
+  }
 }

@@ -31,11 +31,16 @@ export class AppController {
     return { user };
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get('auth/logout')
-  async logout(@Res({ passthrough: true }) res: Response) {
-    // TODO: remove refreshToken from db
+  async logout(
+    @Req() req: RequestWithUser,
+    @Res({ passthrough: true }) response: Response
+  ) {
+    const { user } = req;
+    const tokens = await this.authService.createLogoutCookie(user.id);
 
-    res.cookie('tokens', '', { expires: new Date() });
+    response.setHeader('Set-Cookie', tokens);
     return {
       success: true,
     };
