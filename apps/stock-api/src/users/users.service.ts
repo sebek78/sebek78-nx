@@ -59,6 +59,7 @@ export class UsersService {
       },
       data: {
         refreshToken: updateUserDto.refreshToken,
+        refreshExpiresIn: updateUserDto.refreshExpiresIn,
       },
     });
   }

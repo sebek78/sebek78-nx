@@ -1,10 +1,11 @@
 import { Controller, Get, Post, Req, Res, UseGuards } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { LocalAuthGuard } from '../auth/local-auth-guard';
-import { AuthService, UserData } from '../auth/auth.service';
+import { AuthService } from '../auth/auth.service';
 import { AppService } from './app.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { JwtRefreshGuard } from '../auth/refresh-auth-guard';
+import { UserData } from '../auth/helpers';
 
 interface RequestWithUser extends Request {
   user: UserData;

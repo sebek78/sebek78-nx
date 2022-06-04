@@ -1,8 +1,9 @@
 import { PassportStrategy } from '@nestjs/passport';
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { AuthService, UserData } from './auth.service';
+import { AuthService } from './auth.service';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { Request } from 'express';
+import { UserData } from './helpers';
 
 type TokenPayload = UserData & { iat: number; exp: number };
 

@@ -5,4 +5,5 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {}
 
 export type UpdateRefreshToken = {
   refreshToken: string;
+  refreshExpiresIn: Date;
 };
