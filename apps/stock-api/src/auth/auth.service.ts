@@ -2,9 +2,9 @@ import * as bcrypt from 'bcrypt';
 import { Injectable } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
-import { UpdateRefreshToken } from '../users/dto/update-user.dto';
 import { EXPIRES_IN, REFRESH_TIME } from './auth.module';
-import { compareDate, generateRandomString, UserData } from './helpers';
+import { compareDate, generateRandomString } from './helpers';
+import { UpdateRefreshToken, UserData } from '../types/types';
 
 @Injectable()
 export class AuthService {

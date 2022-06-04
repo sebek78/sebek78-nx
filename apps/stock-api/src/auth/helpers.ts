@@ -1,7 +1,3 @@
-import { User } from '@prisma/client';
-
-export type UserData = Pick<User, 'id' | 'username' | 'role'>;
-
 export const compareDate = (a: Date, b: Date): boolean =>
   a.getTime() > b.getTime();
 

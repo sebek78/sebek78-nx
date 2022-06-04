@@ -1,10 +1,11 @@
 import * as bcrypt from 'bcrypt';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateRefreshToken, UpdateUserDto } from './dto/update-user.dto';
+import { UpdateUserPasswordDto } from './dto/update-user.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import { Prisma } from '@prisma/client';
 import { ErrorMessages, PrismaErrors } from '../prisma/prisma-helpers';
+import { UpdateRefreshToken } from '../types/types';
 
 const saltOrRounds = 10; // bcrypt
 
@@ -80,16 +81,7 @@ export class UsersService {
     });
   }
 
-  findAll() {
-    return `This action returns all users`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  update(id: number, updateUserDto: UpdateUserDto) {
+  updatePassword(id: number, updateUserPasswordDto: UpdateUserPasswordDto) {
     return `This action updates a #${id} user`;
   }
 }
