@@ -1,11 +1,13 @@
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { PassportStrategy } from '@nestjs/passport';
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Request } from 'express';
+import { UsersService } from '../users/users.service';
+import { TokenPayload } from '../types/types';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
-  constructor() {
+  constructor(private userService: UsersService) {
     super({
       jwtFromRequest: ExtractJwt.fromExtractors([
         (request: Request) => {
@@ -19,7 +21,16 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     });
   }
 
-  async validate(payload: unknown) {
-    return payload;
+  async validate(payload: TokenPayload) {
+    const user = await this.userService.findOneById(payload.id);
+
+    if (user) {
+      return user;
+    }
+
+    throw new HttpException(
+      'User with this id does not exist',
+      HttpStatus.NOT_FOUND
+    );
   }
 }

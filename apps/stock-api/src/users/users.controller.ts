@@ -16,12 +16,14 @@ export class UsersController {
 
   @UseGuards(JwtAuthGuard)
   @Patch('/new-password')
-  update(
+  async update(
     @Body() updateUserPasswordDto: UpdateUserPasswordDto,
     @Req() req: RequestWithUser
   ) {
     const { user } = req;
 
-    return this.usersService.updatePassword(user.id, updateUserPasswordDto);
+    await this.usersService.updatePassword(user, updateUserPasswordDto);
+
+    return { success: true };
   }
 }

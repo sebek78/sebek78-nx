@@ -36,8 +36,12 @@ export class AuthService {
     const notExpired = compareDate(refreshExpiresIn, now);
 
     if (refreshToken === user.refreshToken && notExpired) {
-      const { id, username, role } = user;
-      return { id, username, role };
+      const userData: UserData = {
+        id: user.id,
+        username: user.username,
+        role: user.role,
+      };
+      return userData;
     }
   }
 

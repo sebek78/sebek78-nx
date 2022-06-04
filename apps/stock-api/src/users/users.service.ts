@@ -1,9 +1,14 @@
 import * as bcrypt from 'bcrypt';
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  HttpException,
+  HttpStatus,
+  Injectable,
+} from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserPasswordDto } from './dto/update-user.dto';
 import { PrismaService } from '../prisma/prisma.service';
-import { Prisma } from '@prisma/client';
+import { Prisma, User } from '@prisma/client';
 import { ErrorMessages, PrismaErrors } from '../prisma/prisma-helpers';
 import { UpdateRefreshToken } from '../types/types';
 
@@ -53,6 +58,14 @@ export class UsersService {
     });
   }
 
+  async findOneById(id: number) {
+    return this.prisma.user.findUnique({
+      where: {
+        id,
+      },
+    });
+  }
+
   async updateRefreshToken(id: number, updateUserDto: UpdateRefreshToken) {
     const query: Prisma.UserUpdateArgs = {
       where: {
@@ -81,7 +94,32 @@ export class UsersService {
     });
   }
 
-  updatePassword(id: number, updateUserPasswordDto: UpdateUserPasswordDto) {
-    return `This action updates a #${id} user`;
+  async updatePassword(
+    user: User,
+    updateUserPasswordDto: UpdateUserPasswordDto
+  ) {
+    let isPasswordMatching = false;
+
+    isPasswordMatching = await bcrypt.compare(
+      updateUserPasswordDto.password,
+      user.password
+    );
+
+    if (isPasswordMatching) {
+      const hashedNewPassword = await bcrypt.hash(
+        updateUserPasswordDto.newPassword,
+        saltOrRounds
+      );
+      return this.prisma.user.update({
+        where: {
+          id: user.id,
+        },
+        data: {
+          password: hashedNewPassword,
+        },
+      });
+    } else {
+      throw new BadRequestException('Password is invalid.');
+    }
   }
 }

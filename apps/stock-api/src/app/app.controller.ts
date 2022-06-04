@@ -5,7 +5,7 @@ import { AuthService } from '../auth/auth.service';
 import { AppService } from './app.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { JwtRefreshGuard } from '../auth/refresh-auth-guard';
-import { RequestWithUser } from '../types/types';
+import { RequestWithUserData, RequestWithUser } from '../types/types';
 
 @Controller()
 export class AppController {
@@ -17,7 +17,7 @@ export class AppController {
   @UseGuards(LocalAuthGuard)
   @Post('auth/login')
   async login(
-    @Req() req: RequestWithUser,
+    @Req() req: RequestWithUserData,
     @Res({ passthrough: true }) response: Response
   ) {
     const { user } = req;
@@ -37,22 +37,20 @@ export class AppController {
     const tokens = await this.authService.createLogoutCookie(user.id);
 
     response.setHeader('Set-Cookie', tokens);
-    return {
-      success: true,
-    };
+    return { success: true };
   }
 
   @UseGuards(JwtRefreshGuard)
   @Get('auth/refresh-tokens')
   async regenerateTokens(
-    @Req() req: RequestWithUser,
+    @Req() req: RequestWithUserData,
     @Res({ passthrough: true }) response: Response
   ) {
     const { user } = req;
     const tokens = await this.authService.createTokens(user, false);
 
     response.setHeader('Set-Cookie', tokens);
-    return { user };
+    return { success: true };
   }
 
   @UseGuards(JwtAuthGuard)
