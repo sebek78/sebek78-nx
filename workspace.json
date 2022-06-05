@@ -1,8 +1,10 @@
 {
   "version": 2,
   "projects": {
+    "lib-stock": "libs/lib-stock",
     "stock": "apps/stock",
     "stock-api": "apps/stock-api",
-    "stock-e2e": "apps/stock-e2e"
+    "stock-e2e": "apps/stock-e2e",
+    "ui": "libs/ui"
   }
 }
