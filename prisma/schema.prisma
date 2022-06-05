@@ -1,0 +1,40 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model Country {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+
+  @@map("countries")
+}
+
+model Province {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+
+  @@map("provinces")
+}
+
+model User {
+  id               Int       @id @default(autoincrement())
+  username         String    @unique
+  role             Role?     @default(USER)
+  password         String
+  createOn         DateTime  @map("create_on")
+  lastLogin        DateTime? @map("last_login")
+  refreshToken     String?   @map("refresh_token")
+  refreshExpiresIn DateTime? @map("refresh_expires_in")
+
+  @@map("users")
+}
