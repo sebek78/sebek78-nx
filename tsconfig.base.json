@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@sebek78-nx/lib-stock": ["libs/lib-stock/src/index.ts"],
-      "@sebek78-nx/ui": ["libs/ui/src/index.ts"]
+      "@sebek78-nx/ui": ["libs/ui/src/index.ts"],
+      "@sebek78-nx/util": ["libs/util/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

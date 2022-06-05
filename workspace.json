@@ -5,6 +5,7 @@
     "stock": "apps/stock",
     "stock-api": "apps/stock-api",
     "stock-e2e": "apps/stock-e2e",
-    "ui": "libs/ui"
+    "ui": "libs/ui",
+    "util": "libs/util"
   }
 }
