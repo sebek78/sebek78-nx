@@ -1,16 +1,7 @@
-import styled from 'styled-components';
-import NxWelcome from './nx-welcome';
-
-const StyledApp = styled.div`
-  // Your style here
-`;
+import { AppRoot } from '@sebek78-nx/lib-stock';
 
 export function App() {
-  return (
-    <StyledApp>
-      <NxWelcome title="stock" />
-    </StyledApp>
-  );
+  return <AppRoot />;
 }
 
 export default App;

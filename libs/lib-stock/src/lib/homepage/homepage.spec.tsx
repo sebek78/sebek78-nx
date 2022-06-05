@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import LibStock from './lib-stock';
+import Homepage from './homepage';
 
-describe('LibStock', () => {
+describe('Homepage', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<LibStock />);
+    const { baseElement } = render(<Homepage />);
     expect(baseElement).toBeTruthy();
   });
 });
