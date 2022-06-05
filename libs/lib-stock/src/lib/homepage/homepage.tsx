@@ -4,13 +4,13 @@ import styled from 'styled-components';
 export interface HomepageProps {}
 
 const StyledHomepage = styled.div`
-  color: pink;
+  font-family: ${({ theme }) => theme.typography.fontFamily.regular};
 `;
 
 export function Homepage(props: HomepageProps) {
   return (
     <StyledHomepage>
-      <h1>Welcome to Homepage!</h1>
+      <div>Welcome to Homepage!</div>
     </StyledHomepage>
   );
 }

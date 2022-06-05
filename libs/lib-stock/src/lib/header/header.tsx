@@ -4,13 +4,13 @@ import styled from 'styled-components';
 export interface HeaderProps {}
 
 const StyledHeader = styled.div`
-  color: pink;
+  font-family: ${({ theme }) => theme.typography.fontFamily.display};
 `;
 
 export function Header(props: HeaderProps) {
   return (
     <StyledHeader>
-      <h1>Welcome to Header!</h1>
+      <div>Welcome to Header!</div>
     </StyledHeader>
   );
 }
