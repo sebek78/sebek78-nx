@@ -11,7 +11,9 @@ export const theme: DefaultTheme = {
     mode: 'dark',
     background: {
       default: '#0d1117',
-      overlay: '#161b22',
+      subtle: '#161b22',
+      inset: '#010409',
+      /* colors */
       accent: 'rgba(56,139,253,0.15)',
       accentEmphasis: '#1f6feb',
     },
@@ -22,6 +24,7 @@ export const theme: DefaultTheme = {
     text: {
       primary: '#f0f3f6',
       accent: '#58a6ff',
+      attention: '#d29922',
     },
   },
   spacing: (size: number) => `${size * 8}px`,

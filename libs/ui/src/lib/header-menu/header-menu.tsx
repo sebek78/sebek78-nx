@@ -2,6 +2,11 @@ import styled from 'styled-components';
 import { Button } from '../atoms/button/button';
 import { Flexbox } from '../atoms/flexbox/flexbox';
 
+interface HeaderMenuProps {
+  openLoginForm: () => void;
+  isOpenLoginForm: boolean;
+}
+
 const StyledHeaderMenu = styled.div`
   width: 100%;
   height: 60px;
@@ -10,15 +15,18 @@ const StyledHeaderMenu = styled.div`
   }
 `;
 
-export function HeaderMenu() {
+export function HeaderMenu({
+  openLoginForm,
+  isOpenLoginForm,
+}: HeaderMenuProps) {
   return (
     <StyledHeaderMenu>
-      <Flexbox>
-        <Button label="Rejestracja" onClick={() => undefined} />
-        <Button label="Logowanie" onClick={() => undefined} />
-      </Flexbox>
+      {!isOpenLoginForm && (
+        <Flexbox>
+          <Button label="Rejestracja" onClick={() => undefined} />
+          <Button label="Logowanie" onClick={openLoginForm} />
+        </Flexbox>
+      )}
     </StyledHeaderMenu>
   );
 }
-
-export default HeaderMenu;
