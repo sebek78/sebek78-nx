@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Tagline } from '@sebek78-nx/ui';
 
 /* eslint-disable-next-line */
 export interface HomepageProps {}
@@ -10,9 +11,7 @@ const StyledHomepage = styled.div`
 export function Homepage(props: HomepageProps) {
   return (
     <StyledHomepage>
-      <div>Welcome to Homepage!</div>
+      <Tagline text="Część tego, co zarabiasz, powinieneś zatrzymać dla siebie." />
     </StyledHomepage>
   );
 }
-
-export default Homepage;

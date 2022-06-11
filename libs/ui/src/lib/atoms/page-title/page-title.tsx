@@ -9,7 +9,11 @@ const StyledPageTitle = styled.div`
   font-size: ${({ theme }) => theme.typography.mobile.h00.fontSize};
   line-height: ${({ theme }) => theme.typography.mobile.h00.lineHeight};
   font-family: ${({ theme }) => theme.typography.fontFamily.display};
+  width: 100%;
   text-align: center;
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.sm}) {
+    width: max-content;
+  }
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.md}) {
     font-size: ${({ theme }) => theme.typography.desktop.h00.fontSize};
     line-height: ${({ theme }) => theme.typography.desktop.h00.lineHeight};

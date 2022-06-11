@@ -10,7 +10,8 @@ export const theme: DefaultTheme = {
   palette: {
     mode: 'dark',
     background: {
-      default: '#101216',
+      default: '#0d1117',
+      overlay: '#161b22',
     },
     border: {
       default: '#30363d',
@@ -20,6 +21,7 @@ export const theme: DefaultTheme = {
       accent: '#58a6ff',
     },
   },
+  spacing: (size: number) => `${size * 8}px`,
   typography: {
     fontFamily: {
       regular: '"Noto Sans", sans-serif',

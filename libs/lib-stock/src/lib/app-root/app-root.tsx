@@ -1,9 +1,6 @@
 import styled from 'styled-components';
-import Header from '../header/header';
-import Homepage from '../homepage/homepage';
-
-/* eslint-disable-next-line */
-export interface AppRootProps {}
+import { Header } from '../header/header';
+import { Homepage } from '../homepage/homepage';
 
 const StyledAppRoot = styled.div`
   background-color: ${({ theme }) => theme.palette.background.default};
@@ -11,7 +8,7 @@ const StyledAppRoot = styled.div`
   min-height: 100vh;
 `;
 
-export function AppRoot(props: AppRootProps) {
+export function AppRoot() {
   return (
     <StyledAppRoot>
       <Header />

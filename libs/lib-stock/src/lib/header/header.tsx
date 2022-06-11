@@ -1,20 +1,20 @@
 import styled from 'styled-components';
-import { PageTitle, Tagline } from '@sebek78-nx/ui';
-
-/* eslint-disable-next-line */
-export interface HeaderProps {}
+import { Flexbox, HeaderMenu, PagePadding, PageTitle } from '@sebek78-nx/ui';
 
 const StyledHeader = styled.div`
-  border-bottom: 1px solid ${({ theme }) => theme.palette.border.default};
+  background-color: ${({ theme }) => theme.palette.background.overlay};
+  height: 100px;
 `;
 
-export function Header(props: HeaderProps) {
+export function Header() {
   return (
     <StyledHeader>
-      <PageTitle title="Projekt: Ekonomia" />
-      <Tagline text="Część tego, co zarabiasz, powinieneś zatrzymać dla siebie." />
+      <PagePadding>
+        <Flexbox wrap="wrap" justify="space-between">
+          <PageTitle title="Projekt:&nbsp;Ekonomia" />
+          <HeaderMenu />
+        </Flexbox>
+      </PagePadding>
     </StyledHeader>
   );
 }
-
-export default Header;
