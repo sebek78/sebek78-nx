@@ -12,9 +12,12 @@ export const theme: DefaultTheme = {
     background: {
       default: '#0d1117',
       overlay: '#161b22',
+      accent: 'rgba(56,139,253,0.15)',
+      accentEmphasis: '#1f6feb',
     },
     border: {
       default: '#30363d',
+      accentEmphasis: '#1f6feb',
     },
     text: {
       primary: '#f0f3f6',
@@ -27,6 +30,10 @@ export const theme: DefaultTheme = {
       regular: '"Noto Sans", sans-serif',
       display: '"Oranienbaum", serif',
     },
+    fontWeight: {
+      normal: 400,
+      bold: 700,
+    },
     desktop: {
       h00: {
         fontSize: '48px',
@@ -35,6 +42,10 @@ export const theme: DefaultTheme = {
       h0: {
         fontSize: '40px',
         lineHeight: '60px',
+      },
+      body2: {
+        fontSize: '14px',
+        lineHeight: '21px',
       },
     },
     mobile: {
@@ -45,6 +56,10 @@ export const theme: DefaultTheme = {
       h0: {
         fontSize: '32px',
         lineHeight: '50px',
+      },
+      body2: {
+        fontSize: '14px',
+        lineHeight: '17.5px',
       },
     },
   },

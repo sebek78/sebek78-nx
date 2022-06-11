@@ -11,7 +11,7 @@ const StyledPageTitle = styled.div`
   font-family: ${({ theme }) => theme.typography.fontFamily.display};
   width: 100%;
   text-align: center;
-  @media screen and (min-width: ${({ theme }) => theme.breakpoints.sm}) {
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.md}) {
     width: max-content;
   }
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.md}) {

@@ -3,7 +3,10 @@ import { Flexbox, HeaderMenu, PagePadding, PageTitle } from '@sebek78-nx/ui';
 
 const StyledHeader = styled.div`
   background-color: ${({ theme }) => theme.palette.background.overlay};
-  height: 100px;
+  height: 120px;
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    height: 80px;
+  }
 `;
 
 export function Header() {
