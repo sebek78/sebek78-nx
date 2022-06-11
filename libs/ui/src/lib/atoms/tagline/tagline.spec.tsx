@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import Ui from './ui';
+import Tagline from './tagline';
 
-describe('Ui', () => {
+describe('Tagline', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Ui />);
+    const { baseElement } = render(<Tagline />);
     expect(baseElement).toBeTruthy();
   });
 });
