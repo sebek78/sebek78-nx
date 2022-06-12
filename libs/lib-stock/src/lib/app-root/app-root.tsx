@@ -4,7 +4,7 @@ import { Homepage } from '../homepage/homepage';
 
 const StyledAppRoot = styled.div`
   background-color: ${({ theme }) => theme.palette.background.default};
-  color: ${({ theme }) => theme.palette.text.primary};
+  color: ${({ theme }) => theme.palette.text.default};
   min-height: 100vh;
 `;
 

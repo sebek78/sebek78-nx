@@ -1,3 +1,6 @@
+export * from './lib/atoms/input-label/input-label';
+export * from './lib/atoms/form-label/form-label';
+export * from './lib/atoms/text-input/text-input';
 export * from './lib/icons/close-icon/close-icon';
 export * from './lib/atoms/button/button';
 export * from './lib/atoms/page-padding/page-padding';

@@ -14,15 +14,18 @@ export const theme: DefaultTheme = {
       subtle: '#161b22',
       inset: '#010409',
       /* colors */
-      accent: 'rgba(56,139,253,0.15)',
+      accentSubtle: 'rgba(56,139,253,0.15)',
       accentEmphasis: '#1f6feb',
+      successSubtle: 'rgba(46,160,67,0.15)',
+      successEmphasis: '#238636',
     },
     border: {
       default: '#30363d',
-      accentEmphasis: '#1f6feb',
+      accent: '#1f6feb',
+      success: '#238636',
     },
     text: {
-      primary: '#f0f3f6',
+      default: '#f0f3f6',
       accent: '#58a6ff',
       attention: '#d29922',
     },
@@ -46,6 +49,18 @@ export const theme: DefaultTheme = {
         fontSize: '40px',
         lineHeight: '60px',
       },
+      h1: {
+        fontSize: '32px',
+        lineHeight: '48px',
+      },
+      h2: {
+        fontSize: '24px',
+        lineHeight: '36px',
+      },
+      h3: {
+        fontSize: '20px',
+        lineHeight: '30px',
+      },
       body2: {
         fontSize: '14px',
         lineHeight: '21px',
@@ -59,6 +74,18 @@ export const theme: DefaultTheme = {
       h0: {
         fontSize: '32px',
         lineHeight: '50px',
+      },
+      h1: {
+        fontSize: '26px',
+        lineHeight: '40px',
+      },
+      h3: {
+        fontSize: '18px',
+        lineHeight: '25px',
+      },
+      h2: {
+        fontSize: '24px',
+        lineHeight: '36px',
       },
       body2: {
         fontSize: '14px',

@@ -1,5 +1,12 @@
-import { CloseIcon } from '@sebek78-nx/ui';
 import styled from 'styled-components';
+import {
+  Button,
+  CloseIcon,
+  Flexbox,
+  FormLabel,
+  InputLabel,
+  TextInput,
+} from '@sebek78-nx/ui';
 
 export interface LoginFormProps {
   closeLoginForm: () => void;
@@ -7,7 +14,7 @@ export interface LoginFormProps {
 
 const StyledLoginForm = styled.div`
   width: 320px;
-  /* height */
+  padding: 8px 16px 16px;
   position: absolute;
   top: 136px;
   left: 50%;
@@ -20,7 +27,17 @@ const StyledLoginForm = styled.div`
 export function LoginForm({ closeLoginForm }: LoginFormProps) {
   return (
     <StyledLoginForm>
-      <CloseIcon onClick={closeLoginForm} />
+      <Flexbox justify="space-between">
+        <FormLabel text="Logowanie" />
+        <CloseIcon onClick={closeLoginForm} />
+      </Flexbox>
+      <InputLabel text="Login" />
+      <TextInput />
+      <InputLabel text="Password" />
+      <TextInput />
+      <Flexbox>
+        <Button variant="success" label="Zaloguj" onClick={() => undefined} />
+      </Flexbox>
     </StyledLoginForm>
   );
 }

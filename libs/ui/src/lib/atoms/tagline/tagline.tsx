@@ -5,7 +5,7 @@ export interface TaglineProps {
 }
 
 const StyledTagline = styled.div`
-  color: ${({ theme }) => theme.palette.text.primary};
+  color: ${({ theme }) => theme.palette.text.default};
   font-size: ${({ theme }) => theme.typography.mobile.h0.fontSize};
   line-height: ${({ theme }) => theme.typography.mobile.h0.lineHeight};
   font-family: ${({ theme }) => theme.typography.fontFamily.display};
