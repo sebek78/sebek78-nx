@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { User } from '@sebek78-nx/types';
 import { Button } from '../atoms/button/button';
 import { Flexbox } from '../atoms/flexbox/flexbox';
+import { LinkButton } from '../atoms/link-button/link-button';
 
 interface HeaderMenuProps {
   openLoginForm: () => void;
@@ -32,7 +33,11 @@ export function HeaderMenu({
           <Button label="Logowanie" onClick={openLoginForm} />
         </Flexbox>
       )}
-      {user.username && <div onClick={logout}>Logout</div>}
+      {user.username && (
+        <Flexbox>
+          <LinkButton onClick={logout} label="Wyloguj" />
+        </Flexbox>
+      )}
     </StyledHeaderMenu>
   );
 }

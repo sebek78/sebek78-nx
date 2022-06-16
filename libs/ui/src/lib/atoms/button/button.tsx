@@ -14,7 +14,7 @@ const StyledButton = styled.button<{ variant: ButtonVariant }>`
   padding: ${({ theme }) => `${theme.spacing(0.5)} ${theme.spacing(2)}`};
   font-size: ${({ theme }) => theme.typography.mobile.body2.fontSize};
   line-height: ${({ theme }) => theme.typography.mobile.body2.lineHeight};
-  font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
+  letter-spacing: 1px;
   cursor: pointer;
   user-select: none;
   color: ${({ theme }) => theme.palette.text.default};
