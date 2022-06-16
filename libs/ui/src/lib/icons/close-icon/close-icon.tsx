@@ -6,7 +6,7 @@ export interface CloseIconProps {
 }
 
 const StyledCloseIcon = styled(CloseIconSVG)`
-  fill: ${({ theme }) => theme.palette.text.attention};
+  fill: ${({ theme }) => theme.palette.text.accent};
   cursor: pointer;
 `;
 

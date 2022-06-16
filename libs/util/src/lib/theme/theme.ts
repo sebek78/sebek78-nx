@@ -28,6 +28,7 @@ export const theme: DefaultTheme = {
       default: '#f0f3f6',
       accent: '#58a6ff',
       attention: '#d29922',
+      secondary: '#a371f7',
     },
   },
   spacing: (size: number) => `${size * 8}px`,

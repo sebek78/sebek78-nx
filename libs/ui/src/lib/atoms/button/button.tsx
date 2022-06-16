@@ -6,6 +6,7 @@ export interface ButtonProps {
   label: string;
   onClick: () => void;
   variant?: ButtonVariant;
+  type?: 'submit' | 'button';
 }
 
 const StyledButton = styled.button<{ variant: ButtonVariant }>`
@@ -55,9 +56,14 @@ const StyledButton = styled.button<{ variant: ButtonVariant }>`
   }
 `;
 
-export function Button({ label, onClick, variant = 'accent' }: ButtonProps) {
+export function Button({
+  label,
+  onClick,
+  variant = 'accent',
+  type = 'button',
+}: ButtonProps) {
   return (
-    <StyledButton onClick={onClick} variant={variant}>
+    <StyledButton onClick={onClick} variant={variant} type={type}>
       {label}
     </StyledButton>
   );

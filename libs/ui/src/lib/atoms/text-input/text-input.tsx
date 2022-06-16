@@ -1,7 +1,21 @@
+import {
+  Message,
+  Path,
+  UseFormRegister,
+  ValidationRule,
+} from 'react-hook-form';
 import styled from 'styled-components';
 
-/* eslint-disable-next-line */
-export interface TextInputProps {}
+export interface TextInputProps<T> {
+  register: UseFormRegister<T>;
+  label: Path<T>;
+  // required: Partial<{
+  //   required: Message | ValidationRule<boolean>;
+  //   maxLength: ValidationRule<number>;
+  //   minLength: ValidationRule<number>;
+  // }>;
+  type?: 'text' | 'password';
+}
 
 const StyledTextInput = styled.input`
   display: block;
@@ -20,6 +34,11 @@ const StyledTextInput = styled.input`
   }
 `;
 
-export function TextInput(props: TextInputProps) {
-  return <StyledTextInput />;
+export function TextInput<T>({
+  register,
+  label,
+  // required,
+  type = 'text',
+}: TextInputProps<T>) {
+  return <StyledTextInput {...register(label /*, required*/)} type={type} />;
 }

@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import {
   Button,
   CloseIcon,
@@ -7,12 +9,18 @@ import {
   InputLabel,
   TextInput,
 } from '@sebek78-nx/ui';
+import { schema } from './schema';
 
 export interface LoginFormProps {
   closeLoginForm: () => void;
 }
 
-const StyledLoginForm = styled.div`
+interface IFormInput {
+  login: string;
+  password: string;
+}
+
+const StyledLoginForm = styled.form`
   width: 320px;
   padding: 8px 16px 16px;
   position: absolute;
@@ -25,18 +33,36 @@ const StyledLoginForm = styled.div`
 `;
 
 export function LoginForm({ closeLoginForm }: LoginFormProps) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IFormInput>({
+    resolver: yupResolver(schema),
+  });
+
+  const onSubmit: SubmitHandler<IFormInput> = (data: IFormInput) =>
+    console.log(data);
+
   return (
-    <StyledLoginForm>
+    <StyledLoginForm onSubmit={handleSubmit(onSubmit)}>
       <Flexbox justify="space-between">
         <FormLabel text="Logowanie" />
         <CloseIcon onClick={closeLoginForm} />
       </Flexbox>
       <InputLabel text="Login" />
-      <TextInput />
+      {errors.login?.message}
+      <TextInput register={register} label="login" />
       <InputLabel text="Password" />
-      <TextInput />
+      {errors.password?.message}
+      <TextInput register={register} label="password" type="password" />
       <Flexbox>
-        <Button variant="success" label="Zaloguj" onClick={() => undefined} />
+        <Button
+          variant="success"
+          label="Zaloguj"
+          onClick={() => undefined}
+          type="submit"
+        />
       </Flexbox>
     </StyledLoginForm>
   );

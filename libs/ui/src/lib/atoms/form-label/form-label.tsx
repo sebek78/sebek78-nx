@@ -5,7 +5,7 @@ export interface FormLabelProps {
 }
 
 const StyledFormLabel = styled.div`
-  color: ${({ theme }) => theme.palette.text.accent};
+  color: ${({ theme }) => theme.palette.text.secondary};
   font-size: ${({ theme }) => theme.typography.mobile.h2.fontSize};
   line-height: ${({ theme }) => theme.typography.mobile.h2.lineHeight};
   font-family: ${({ theme }) => theme.typography.fontFamily.display};
