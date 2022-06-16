@@ -1,10 +1,12 @@
 import styled from 'styled-components';
+import { User } from '@sebek78-nx/types';
 import { Button } from '../atoms/button/button';
 import { Flexbox } from '../atoms/flexbox/flexbox';
 
 interface HeaderMenuProps {
   openLoginForm: () => void;
   isOpenLoginForm: boolean;
+  user: User;
 }
 
 const StyledHeaderMenu = styled.div`
@@ -18,15 +20,17 @@ const StyledHeaderMenu = styled.div`
 export function HeaderMenu({
   openLoginForm,
   isOpenLoginForm,
+  user,
 }: HeaderMenuProps) {
   return (
     <StyledHeaderMenu>
-      {!isOpenLoginForm && (
+      {!isOpenLoginForm && !user.username && (
         <Flexbox>
           <Button label="Rejestracja" onClick={() => undefined} />
           <Button label="Logowanie" onClick={openLoginForm} />
         </Flexbox>
       )}
+      {user.username && <div>Logout</div>}
     </StyledHeaderMenu>
   );
 }

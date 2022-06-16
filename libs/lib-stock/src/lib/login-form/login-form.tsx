@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import axios, { AxiosError, AxiosResponse } from 'axios';
+import { useMutation } from 'react-query';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import {
@@ -11,13 +13,16 @@ import {
   TextInput,
 } from '@sebek78-nx/ui';
 import { schema } from './schema';
+import { Dispatch } from 'react';
+import { User } from '@sebek78-nx/types';
 
 export interface LoginFormProps {
   closeLoginForm: () => void;
+  setUser: Dispatch<React.SetStateAction<User>>;
 }
 
 interface IFormInput {
-  login: string;
+  username: string;
   password: string;
 }
 
@@ -33,7 +38,7 @@ const StyledLoginForm = styled.form`
   border-radius: 6px;
 `;
 
-export function LoginForm({ closeLoginForm }: LoginFormProps) {
+export function LoginForm({ closeLoginForm, setUser }: LoginFormProps) {
   const {
     register,
     handleSubmit,
@@ -42,8 +47,24 @@ export function LoginForm({ closeLoginForm }: LoginFormProps) {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit: SubmitHandler<IFormInput> = (data: IFormInput) =>
-    console.log(data);
+  const mutation = useMutation(
+    (data: IFormInput) => {
+      return axios.post('http://localhost:3333/api/auth/login', data);
+    },
+    {
+      onSuccess: (response: AxiosResponse) => {
+        closeLoginForm();
+        setUser(response.data.user);
+      },
+      onError: (error: AxiosError) => {
+        console.log(error);
+      },
+    }
+  );
+
+  const onSubmit: SubmitHandler<IFormInput> = (data: IFormInput) => {
+    mutation.mutate(data);
+  };
 
   return (
     <StyledLoginForm onSubmit={handleSubmit(onSubmit)}>
@@ -51,10 +72,10 @@ export function LoginForm({ closeLoginForm }: LoginFormProps) {
         <FormLabel text="Logowanie" />
         <CloseIcon onClick={closeLoginForm} />
       </Flexbox>
-      <InputLabel text="Login" />
-      <ErrorLabel message={errors.login?.message} />
-      <TextInput register={register} label="login" />
-      <InputLabel text="Password" />
+      <InputLabel text="Nazwa użytkownika" />
+      <ErrorLabel message={errors.username?.message} />
+      <TextInput register={register} label="username" />
+      <InputLabel text="Hasło" />
       <ErrorLabel message={errors.password?.message} />
       <TextInput register={register} label="password" type="password" />
       <Flexbox>

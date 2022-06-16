@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import styled from 'styled-components';
+import { User } from '@sebek78-nx/types';
 import { Header } from '../header/header';
 import { Homepage } from '../homepage/homepage';
 
@@ -8,10 +10,18 @@ const StyledAppRoot = styled.div`
   min-height: 100vh;
 `;
 
+const guest: User = {
+  id: -1,
+  role: 'GUEST',
+  username: '',
+};
+
 export function AppRoot() {
+  const [user, setUser] = useState<User>(guest);
+
   return (
     <StyledAppRoot>
-      <Header />
+      <Header user={user} setUser={setUser} />
       <Homepage />
     </StyledAppRoot>
   );
