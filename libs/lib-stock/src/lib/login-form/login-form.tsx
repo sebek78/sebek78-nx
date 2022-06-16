@@ -4,6 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import {
   Button,
   CloseIcon,
+  ErrorLabel,
   Flexbox,
   FormLabel,
   InputLabel,
@@ -51,10 +52,10 @@ export function LoginForm({ closeLoginForm }: LoginFormProps) {
         <CloseIcon onClick={closeLoginForm} />
       </Flexbox>
       <InputLabel text="Login" />
-      {errors.login?.message}
+      <ErrorLabel message={errors.login?.message} />
       <TextInput register={register} label="login" />
       <InputLabel text="Password" />
-      {errors.password?.message}
+      <ErrorLabel message={errors.password?.message} />
       <TextInput register={register} label="password" type="password" />
       <Flexbox>
         <Button

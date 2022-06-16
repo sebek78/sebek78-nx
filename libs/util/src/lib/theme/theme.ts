@@ -29,6 +29,7 @@ export const theme: DefaultTheme = {
       accent: '#58a6ff',
       attention: '#d29922',
       secondary: '#a371f7',
+      danger: '#f85149',
     },
   },
   spacing: (size: number) => `${size * 8}px`,
@@ -62,6 +63,10 @@ export const theme: DefaultTheme = {
         fontSize: '20px',
         lineHeight: '30px',
       },
+      body1: {
+        fontSize: '16px',
+        lineHeight: '24px',
+      },
       body2: {
         fontSize: '14px',
         lineHeight: '21px',
@@ -87,6 +92,10 @@ export const theme: DefaultTheme = {
       h2: {
         fontSize: '24px',
         lineHeight: '36px',
+      },
+      body1: {
+        fontSize: '16px',
+        lineHeight: '20px',
       },
       body2: {
         fontSize: '14px',
