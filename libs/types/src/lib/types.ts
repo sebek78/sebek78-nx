@@ -7,3 +7,8 @@ export interface User {
   role: UserRole;
   username: string;
 }
+
+export interface ILoginFormInput {
+  username: string;
+  password: string;
+}

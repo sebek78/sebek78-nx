@@ -1,5 +1,4 @@
-import styled from 'styled-components';
-import axios, { AxiosError, AxiosResponse } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 import { useMutation } from 'react-query';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -14,60 +13,35 @@ import {
 } from '@sebek78-nx/ui';
 import { schema } from './schema';
 import { Dispatch } from 'react';
-import { User } from '@sebek78-nx/types';
+import { User, ILoginFormInput } from '@sebek78-nx/types';
+import { loginUser } from '@sebek78-nx/data-access';
+import { StyledLoginForm } from './styled-login-form';
 
 export interface LoginFormProps {
   closeLoginForm: () => void;
   setUser: Dispatch<React.SetStateAction<User>>;
 }
 
-interface IFormInput {
-  username: string;
-  password: string;
-}
-
-const StyledLoginForm = styled.form`
-  width: 320px;
-  padding: 8px 16px 16px;
-  position: absolute;
-  top: 136px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: ${({ theme }) => theme.palette.background.subtle};
-  border: 1px solid ${({ theme }) => theme.palette.border.default};
-  border-radius: 6px;
-`;
-
 export function LoginForm({ closeLoginForm, setUser }: LoginFormProps) {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IFormInput>({
+  } = useForm<ILoginFormInput>({
     resolver: yupResolver(schema),
   });
 
-  const mutation = useMutation(
-    (data: IFormInput) => {
-      return axios({
-        method: 'post',
-        url: 'http://localhost:3333/api/auth/login',
-        data,
-        withCredentials: true,
-      });
+  const mutation = useMutation(loginUser, {
+    onSuccess: ({ data }: AxiosResponse) => {
+      closeLoginForm();
+      setUser(data.user);
     },
-    {
-      onSuccess: (response: AxiosResponse) => {
-        closeLoginForm();
-        setUser(response.data.user);
-      },
-      onError: (error: AxiosError) => {
-        console.log(error);
-      },
-    }
-  );
+    onError: (error: AxiosError) => {
+      console.log(error);
+    },
+  });
 
-  const onSubmit: SubmitHandler<IFormInput> = (data: IFormInput) => {
+  const onSubmit: SubmitHandler<ILoginFormInput> = (data: ILoginFormInput) => {
     mutation.mutate(data);
   };
 

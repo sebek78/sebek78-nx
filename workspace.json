@@ -1,6 +1,7 @@
 {
   "version": 2,
   "projects": {
+    "data-access": "libs/data-access",
     "lib-stock": "libs/lib-stock",
     "stock": "apps/stock",
     "stock-api": "apps/stock-api",
