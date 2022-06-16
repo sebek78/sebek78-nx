@@ -14,8 +14,12 @@ async function bootstrap() {
     })
   );
   app.use(cookieParser());
+
   if (process.env.NODE_ENV) {
-    app.enableCors();
+    app.enableCors({
+      credentials: true,
+      origin: 'http://localhost:4200',
+    });
   }
 
   const port = process.env.PORT || 3333;

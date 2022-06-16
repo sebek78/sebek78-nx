@@ -7,6 +7,7 @@ interface HeaderMenuProps {
   openLoginForm: () => void;
   isOpenLoginForm: boolean;
   user: User;
+  logout: () => void;
 }
 
 const StyledHeaderMenu = styled.div`
@@ -21,6 +22,7 @@ export function HeaderMenu({
   openLoginForm,
   isOpenLoginForm,
   user,
+  logout,
 }: HeaderMenuProps) {
   return (
     <StyledHeaderMenu>
@@ -30,7 +32,7 @@ export function HeaderMenu({
           <Button label="Logowanie" onClick={openLoginForm} />
         </Flexbox>
       )}
-      {user.username && <div>Logout</div>}
+      {user.username && <div onClick={logout}>Logout</div>}
     </StyledHeaderMenu>
   );
 }

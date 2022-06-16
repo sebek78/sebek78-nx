@@ -49,7 +49,12 @@ export function LoginForm({ closeLoginForm, setUser }: LoginFormProps) {
 
   const mutation = useMutation(
     (data: IFormInput) => {
-      return axios.post('http://localhost:3333/api/auth/login', data);
+      return axios({
+        method: 'post',
+        url: 'http://localhost:3333/api/auth/login',
+        data,
+        withCredentials: true,
+      });
     },
     {
       onSuccess: (response: AxiosResponse) => {
