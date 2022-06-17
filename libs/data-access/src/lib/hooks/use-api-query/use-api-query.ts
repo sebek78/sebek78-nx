@@ -1,15 +1,29 @@
-import { useState, useCallback } from 'react';
+import { AxiosError } from 'axios';
+import { useQuery } from 'react-query';
+import { API_URL } from '@sebek78-nx/util';
+import { instance as axios } from '../../interceptor';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface UseApiQuery {
-  count: number;
-  increment: () => void;
+export interface UseApiQuery<T> {
+  data: T | undefined;
+  error: AxiosError | null;
+  isError: boolean;
+  isLoading: boolean;
+  isSuccess: boolean;
 }
 
-export function useApiQuery(): UseApiQuery {
-  const [count, setCount] = useState(0);
-  const increment = useCallback(() => setCount((x) => x + 1), []);
-  return { count, increment };
-}
+export function useApiQuery<T>(dataKey: string, path: string): UseApiQuery<T> {
+  const { data, error, isError, isLoading, isSuccess } = useQuery<
+    T,
+    AxiosError
+  >(dataKey, async () => {
+    const response = await axios({
+      url: `${API_URL}${path}`,
+      withCredentials: true,
+      method: 'get',
+    });
 
-export default useApiQuery;
+    return response.data;
+  });
+
+  return { data, error, isError, isLoading, isSuccess };
+}
