@@ -16,6 +16,7 @@ import { Dispatch } from 'react';
 import { User, ILoginFormInput } from '@sebek78-nx/types';
 import { loginUser } from '@sebek78-nx/data-access';
 import { StyledLoginForm } from './styled-login-form';
+import { STORAGE_KEY } from '@sebek78-nx/util';
 
 export interface LoginFormProps {
   closeLoginForm: () => void;
@@ -33,6 +34,7 @@ export function LoginForm({ closeLoginForm, setUser }: LoginFormProps) {
 
   const mutation = useMutation(loginUser, {
     onSuccess: ({ data }: AxiosResponse) => {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data.user));
       closeLoginForm();
       setUser(data.user);
     },

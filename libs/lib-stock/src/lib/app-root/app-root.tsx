@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { SuccessResponse, User } from '@sebek78-nx/types';
-import { guest, REFRESH_TOKEN_TIME } from '@sebek78-nx/util';
+import { SuccessResponse } from '@sebek78-nx/types';
+import { initialUser, REFRESH_TOKEN_TIME } from '@sebek78-nx/util';
 import { Header } from '../header/header';
 import { Homepage } from '../homepage/homepage';
 import { MainPage } from '../main-page/main-page';
@@ -16,7 +16,7 @@ const StyledAppRoot = styled.div`
 
 export function AppRoot() {
   const [updateTime, setUpdateTime] = useState(-1);
-  const [user, setUser] = useState<User>(guest);
+  const [user, setUser] = useState(initialUser);
 
   useEffect(() => {
     let id: NodeJS.Timeout;

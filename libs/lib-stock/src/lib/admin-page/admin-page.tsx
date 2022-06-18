@@ -1,16 +1,14 @@
+import { memo } from 'react';
 import styled from 'styled-components';
 
-/* eslint-disable-next-line */
-export interface AdminPageProps {}
-
 const StyledAdminPage = styled.div`
-  color: pink;
+  color: red;
 `;
 
-export function AdminPage(props: AdminPageProps) {
+export const AdminPage = memo(function AdminPage() {
   return (
     <StyledAdminPage>
       <h1>Welcome to AdminPage!</h1>
     </StyledAdminPage>
   );
-}
+});

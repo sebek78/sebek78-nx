@@ -1,11 +1,11 @@
-import { Dispatch, useState } from 'react';
+import { Dispatch, memo, useState } from 'react';
 import { AxiosError } from 'axios';
 import { useMutation } from 'react-query';
 import { User } from '@sebek78-nx/types';
 import { Flexbox, HeaderMenu, PagePadding, PageTitle } from '@sebek78-nx/ui';
 import { LoginForm } from '../login-form/login-form';
 import { StyledHeader } from './styled-header';
-import { guest } from '@sebek78-nx/util';
+import { guest, STORAGE_KEY } from '@sebek78-nx/util';
 import { logoutUser } from '@sebek78-nx/data-access';
 
 interface HeaderProps {
@@ -13,11 +13,12 @@ interface HeaderProps {
   setUser: Dispatch<React.SetStateAction<User>>;
 }
 
-export function Header({ user, setUser }: HeaderProps) {
+export const Header = memo(function Header({ user, setUser }: HeaderProps) {
   const [openLoginForm, setOpenLoginForm] = useState(false);
 
   const mutation = useMutation(logoutUser, {
     onSuccess: () => {
+      localStorage.removeItem(STORAGE_KEY);
       setUser(guest);
     },
     onError: (error: AxiosError) => {
@@ -47,4 +48,4 @@ export function Header({ user, setUser }: HeaderProps) {
       )}
     </StyledHeader>
   );
-}
+});

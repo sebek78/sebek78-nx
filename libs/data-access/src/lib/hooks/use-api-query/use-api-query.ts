@@ -28,6 +28,7 @@ export function useApiQuery<T>(dataKey: string, path: string): UseApiQuery<T> {
     },
     {
       retry: false,
+      refetchOnWindowFocus: false,
     }
   );
 
