@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { EXPIRES_IN, REFRESH_TIME } from './auth.module';
-import { compareDate, generateRandomString } from './helpers';
+import { compareDate } from './helpers';
 import { UpdateRefreshToken, UserData } from '../types/types';
 
 @Injectable()
@@ -34,7 +34,7 @@ export class AuthService {
     const { refreshExpiresIn } = user;
     const now = new Date();
     const notExpired = compareDate(refreshExpiresIn, now);
-
+    // TODO: encrypt refresh token
     if (refreshToken === user.refreshToken && notExpired) {
       const userData: UserData = {
         id: user.id,
@@ -51,9 +51,9 @@ export class AuthService {
     return this.jwtService.sign(payload);
   }
 
-  async getRefreshToken(userId: number, isLogin: boolean) {
+  async getRefreshToken({ username, id }: UserData, isLogin: boolean) {
     const payload = {
-      refreshToken: generateRandomString(16),
+      username,
     };
     const token = this.jwtService.sign(payload, {
       secret: process.env.JWT_REFRESH_SECRET,
@@ -62,19 +62,20 @@ export class AuthService {
 
     const eightHours = Date.now() + 8 * 60 * 60 * 1000;
     const userDataToUpdate: UpdateRefreshToken = {
-      refreshToken: token,
+      refreshToken: token, // TODO: encrypt token before save
       refreshExpiresIn: new Date(eightHours),
     };
 
     if (isLogin) userDataToUpdate.lastLogin = new Date();
 
-    await this.usersService.updateRefreshToken(userId, userDataToUpdate);
-    return userDataToUpdate.refreshToken;
+    await this.usersService.updateRefreshToken(id, userDataToUpdate);
+
+    return token;
   }
 
   async createTokens(user: UserData, isLogin: boolean) {
     const accessToken = await this.getJwtToken(user);
-    const refreshToken = await this.getRefreshToken(user.id, isLogin);
+    const refreshToken = await this.getRefreshToken(user, isLogin);
 
     const authCookie = `Authentication=${accessToken}; HttpOnly; Path=/; Max-Age=${EXPIRES_IN}`;
     const refreshCookie = `Refresh=${refreshToken}; HttpOnly; Path=/; Max-Age=${REFRESH_TIME}`;

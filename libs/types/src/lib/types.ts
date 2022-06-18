@@ -12,3 +12,7 @@ export interface ILoginFormInput {
   username: string;
   password: string;
 }
+
+export interface SuccessResponse {
+  success: boolean;
+}

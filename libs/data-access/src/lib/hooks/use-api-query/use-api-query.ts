@@ -15,15 +15,21 @@ export function useApiQuery<T>(dataKey: string, path: string): UseApiQuery<T> {
   const { data, error, isError, isLoading, isSuccess } = useQuery<
     T,
     AxiosError
-  >(dataKey, async () => {
-    const response = await axios({
-      url: `${API_URL}${path}`,
-      withCredentials: true,
-      method: 'get',
-    });
+  >(
+    dataKey,
+    async () => {
+      const response = await axios({
+        url: `${API_URL}${path}`,
+        withCredentials: true,
+        method: 'get',
+      });
 
-    return response.data;
-  });
+      return response.data;
+    },
+    {
+      retry: false,
+    }
+  );
 
   return { data, error, isError, isLoading, isSuccess };
 }

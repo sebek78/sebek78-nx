@@ -37,7 +37,8 @@ export function LoginForm({ closeLoginForm, setUser }: LoginFormProps) {
       setUser(data.user);
     },
     onError: (error: AxiosError) => {
-      console.log(error);
+      // TODO: show login incorrect message
+      console.log(error.response?.data);
     },
   });
 
