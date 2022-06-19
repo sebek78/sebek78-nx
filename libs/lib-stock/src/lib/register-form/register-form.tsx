@@ -11,47 +11,46 @@ import {
   InputLabel,
   TextInput,
 } from '@sebek78-nx/ui';
-import { loginSchema } from '@sebek78-nx/util';
-import { Dispatch } from 'react';
-import { User, ILoginFormInput } from '@sebek78-nx/types';
-import { loginUser } from '@sebek78-nx/data-access';
+import { registerSchema } from '@sebek78-nx/util';
+import { IRegisterFormInput } from '@sebek78-nx/types';
+import { registerUser } from '@sebek78-nx/data-access';
 import { Form } from '@sebek78-nx/ui';
-import { STORAGE_KEY } from '@sebek78-nx/util';
 
-export interface LoginFormProps {
+export interface RegisterFormProps {
   closeForm: () => void;
-  setUser: Dispatch<React.SetStateAction<User>>;
 }
 
-export function LoginForm({ closeForm, setUser }: LoginFormProps) {
+export function RegisterForm({ closeForm }: RegisterFormProps) {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ILoginFormInput>({
-    resolver: yupResolver(loginSchema),
+  } = useForm<IRegisterFormInput>({
+    resolver: yupResolver(registerSchema),
   });
 
-  const mutation = useMutation(loginUser, {
+  const mutation = useMutation(registerUser, {
     onSuccess: ({ data }) => {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(data.user));
+      // TODO: show register success message
+      console.log(data);
       closeForm();
-      setUser(data.user);
     },
     onError: (error: AxiosError) => {
-      // TODO: show login incorrect message
+      // TODO: show register incorrect message
       console.log(error.response?.data);
     },
   });
 
-  const onSubmit: SubmitHandler<ILoginFormInput> = (data: ILoginFormInput) => {
+  const onSubmit: SubmitHandler<IRegisterFormInput> = (
+    data: IRegisterFormInput
+  ) => {
     mutation.mutate(data);
   };
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <Flexbox justify="space-between">
-        <FormLabel text="Logowanie" />
+        <FormLabel text="Rejestracja" />
         <CloseIcon onClick={closeForm} />
       </Flexbox>
       <InputLabel text="Nazwa użytkownika" />
@@ -60,10 +59,13 @@ export function LoginForm({ closeForm, setUser }: LoginFormProps) {
       <InputLabel text="Hasło" />
       <ErrorLabel message={errors.password?.message} />
       <TextInput register={register} label="password" type="password" />
+      <InputLabel text="Powtórz hasło" />
+      <ErrorLabel message={errors.password2?.message} />
+      <TextInput register={register} label="password2" type="password" />
       <Flexbox>
         <Button
           variant="success"
-          label="Zaloguj"
+          label="Rejestruj"
           onClick={() => undefined}
           type="submit"
         />

@@ -6,7 +6,9 @@ import { LinkButton } from '../atoms/link-button/link-button';
 
 interface HeaderMenuProps {
   openLoginForm: () => void;
+  openRegisterForm: () => void;
   isOpenLoginForm: boolean;
+  isOpenRegisterForm: boolean;
   user: User;
   logout: () => void;
 }
@@ -21,15 +23,17 @@ const StyledHeaderMenu = styled.div`
 
 export function HeaderMenu({
   openLoginForm,
+  openRegisterForm,
   isOpenLoginForm,
+  isOpenRegisterForm,
   user,
   logout,
 }: HeaderMenuProps) {
   return (
     <StyledHeaderMenu>
-      {!isOpenLoginForm && !user.username && (
+      {!isOpenLoginForm && !isOpenRegisterForm && !user.username && (
         <Flexbox>
-          <Button label="Rejestracja" onClick={() => undefined} />
+          <Button label="Rejestracja" onClick={openRegisterForm} />
           <Button label="Logowanie" onClick={openLoginForm} />
         </Flexbox>
       )}

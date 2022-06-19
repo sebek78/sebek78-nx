@@ -7,6 +7,7 @@ import { LoginForm } from '../login-form/login-form';
 import { StyledHeader } from './styled-header';
 import { guest, STORAGE_KEY } from '@sebek78-nx/util';
 import { logoutUser } from '@sebek78-nx/data-access';
+import { RegisterForm } from '../register-form/register-form';
 
 interface HeaderProps {
   user: User;
@@ -15,11 +16,14 @@ interface HeaderProps {
 
 export const Header = memo(function Header({ user, setUser }: HeaderProps) {
   const [openLoginForm, setOpenLoginForm] = useState(false);
+  const [openRegisterForm, setOpenRegisterForm] = useState(false);
 
   const mutation = useMutation(logoutUser, {
-    onSuccess: () => {
-      localStorage.removeItem(STORAGE_KEY);
-      setUser(guest);
+    onSuccess: ({ data }) => {
+      if (data.success) {
+        localStorage.removeItem(STORAGE_KEY);
+        setUser(guest);
+      }
     },
     onError: (error: AxiosError) => {
       console.log(error);
@@ -28,6 +32,8 @@ export const Header = memo(function Header({ user, setUser }: HeaderProps) {
 
   const handleOpenLoginForm = () => setOpenLoginForm(true);
   const handleCloseLoginForm = () => setOpenLoginForm(false);
+  const handleOpenRegisterForm = () => setOpenRegisterForm(true);
+  const handleCloseRegisterForm = () => setOpenRegisterForm(false);
   const logout = () => mutation.mutate();
 
   return (
@@ -38,14 +44,17 @@ export const Header = memo(function Header({ user, setUser }: HeaderProps) {
           <HeaderMenu
             user={user}
             openLoginForm={handleOpenLoginForm}
+            openRegisterForm={handleOpenRegisterForm}
             isOpenLoginForm={openLoginForm}
+            isOpenRegisterForm={openRegisterForm}
             logout={logout}
           />
         </Flexbox>
       </PagePadding>
       {openLoginForm && (
-        <LoginForm closeLoginForm={handleCloseLoginForm} setUser={setUser} />
+        <LoginForm closeForm={handleCloseLoginForm} setUser={setUser} />
       )}
+      {openRegisterForm && <RegisterForm closeForm={handleCloseRegisterForm} />}
     </StyledHeader>
   );
 });

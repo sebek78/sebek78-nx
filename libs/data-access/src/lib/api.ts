@@ -1,5 +1,11 @@
-import { AxiosRequestConfig } from 'axios';
-import { ILoginFormInput } from '@sebek78-nx/types';
+import { AxiosPromise, AxiosRequestConfig } from 'axios';
+import {
+  ILoginFormInput,
+  IRegisterFormInput,
+  LoginSuccess,
+  RegisterSuccessResponse,
+  SuccessResponse,
+} from '@sebek78-nx/types';
 import { API_URL } from '@sebek78-nx/util';
 import { instance as axios } from './interceptor';
 
@@ -23,12 +29,20 @@ const loginUser = (data: ILoginFormInput) =>
     ...defaultOptions,
     url: `${API_URL}/auth/login`,
     data,
-  });
+  }) as AxiosPromise<LoginSuccess>;
 
 const logoutUser = () =>
   axios({
     ...defaultOptions,
     url: `${API_URL}/auth/logout`,
-  });
+  }) as AxiosPromise<SuccessResponse>;
 
-export { getRefreshToken, loginUser, logoutUser };
+const registerUser = (data: IRegisterFormInput) =>
+  axios({
+    ...defaultOptions,
+    url: `${API_URL}/users`,
+    withCredentials: false,
+    data,
+  }) as AxiosPromise<RegisterSuccessResponse>;
+
+export { getRefreshToken, loginUser, logoutUser, registerUser };

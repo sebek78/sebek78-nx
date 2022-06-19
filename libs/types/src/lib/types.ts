@@ -13,6 +13,20 @@ export interface ILoginFormInput {
   password: string;
 }
 
+export interface IRegisterFormInput {
+  username: string;
+  password: string;
+  password2: string;
+}
+
 export interface SuccessResponse {
   success: boolean;
+}
+
+export interface RegisterSuccessResponse {
+  username: string;
+}
+
+export interface LoginSuccess {
+  user: User;
 }

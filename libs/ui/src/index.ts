@@ -1,3 +1,4 @@
+export * from './lib/atoms/form/form';
 export * from './lib/atoms/link-button/link-button';
 export * from './lib/atoms/error-label/error-label';
 export * from './lib/atoms/input-label/input-label';
