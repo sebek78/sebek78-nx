@@ -11,11 +11,12 @@ import {
   InputLabel,
   TextInput,
 } from '@sebek78-nx/ui';
-import { registerSchema } from '@sebek78-nx/util';
+import { registerSchema, toastConfig } from '@sebek78-nx/util';
 import { ApiError, IRegisterFormInput } from '@sebek78-nx/types';
 import { registerUser } from '@sebek78-nx/data-access';
 import { Form } from '@sebek78-nx/ui';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 export interface RegisterFormProps {
   closeForm: () => void;
@@ -23,6 +24,9 @@ export interface RegisterFormProps {
 
 export function RegisterForm({ closeForm }: RegisterFormProps) {
   const [error, setError] = useState('');
+  const notify = (username: string) =>
+    toast.success(`Zarejestrowano ${username}. Zaloguj się.`, toastConfig);
+
   const {
     register,
     handleSubmit,
@@ -33,8 +37,7 @@ export function RegisterForm({ closeForm }: RegisterFormProps) {
 
   const mutation = useMutation(registerUser, {
     onSuccess: ({ data }) => {
-      // TODO: show register success message
-      console.log(data);
+      notify(data.username);
       closeForm();
     },
     onError: (error: AxiosError<ApiError>) => {
