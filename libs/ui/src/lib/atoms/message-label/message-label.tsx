@@ -1,11 +1,12 @@
+import { MessageType } from '@sebek78-nx/types';
 import styled from 'styled-components';
 
 export interface MessageLabelProps {
   message?: string;
-  type?: string;
+  type?: MessageType;
 }
 
-const StyledMessageLabel = styled.div<{ type: string }>`
+const StyledMessageLabel = styled.div<{ type: MessageType }>`
   display: block;
   margin: ${({ theme }) => theme.spacing(1)} 0;
   color: ${({ theme, type }) => {

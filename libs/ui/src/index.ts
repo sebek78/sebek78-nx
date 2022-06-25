@@ -1,3 +1,5 @@
+export * from './lib/molecules/text-field/text-field';
+export * from './lib/molecules/form-header/form-header';
 export * from './lib/atoms/form/form';
 export * from './lib/atoms/link-button/link-button';
 export * from './lib/atoms/message-label/message-label';

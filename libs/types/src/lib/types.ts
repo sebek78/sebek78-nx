@@ -36,3 +36,5 @@ export interface ApiError {
   message: string;
   statusCode: number;
 }
+
+export type MessageType = 'success' | 'error' | 'default';

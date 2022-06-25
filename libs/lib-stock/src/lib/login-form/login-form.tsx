@@ -2,20 +2,19 @@ import { AxiosError } from 'axios';
 import { useMutation } from 'react-query';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Dispatch, useState } from 'react';
 import {
   Button,
-  CloseIcon,
   MessageLabel,
+  Form,
   Flexbox,
-  FormLabel,
-  InputLabel,
-  TextInput,
+  FormHeader,
+  TextField,
 } from '@sebek78-nx/ui';
 import { loginSchema } from '@sebek78-nx/util';
-import { Dispatch, useState } from 'react';
+
 import { User, ILoginFormInput, ApiError } from '@sebek78-nx/types';
 import { loginUser } from '@sebek78-nx/data-access';
-import { Form } from '@sebek78-nx/ui';
 import { STORAGE_KEY } from '@sebek78-nx/util';
 
 export interface LoginFormProps {
@@ -51,17 +50,23 @@ export function LoginForm({ closeForm, setUser }: LoginFormProps) {
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
-      <Flexbox justify="space-between">
-        <FormLabel text="Logowanie" />
-        <CloseIcon onClick={closeForm} />
-      </Flexbox>
+      <FormHeader label="Logowanie" onClose={closeForm} />
       {error && <MessageLabel message={error} type="error" />}
-      <InputLabel text="Nazwa użytkownika" />
-      <MessageLabel message={errors.username?.message} type="error" />
-      <TextInput register={register} label="username" />
-      <InputLabel text="Hasło" />
-      <MessageLabel message={errors.password?.message} type="error" />
-      <TextInput register={register} label="password" type="password" />
+      <TextField
+        labelText="Nazwa użytkownika"
+        message={errors.username?.message}
+        messageType="error"
+        register={register}
+        inputLabel="username"
+      />
+      <TextField
+        labelText="Hasło"
+        message={errors.password?.message}
+        messageType="error"
+        register={register}
+        inputLabel="password"
+        type="password"
+      />
       <Flexbox>
         <Button
           variant="success"
