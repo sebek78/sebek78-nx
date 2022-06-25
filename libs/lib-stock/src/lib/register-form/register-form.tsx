@@ -1,9 +1,3 @@
-import { AxiosError } from 'axios';
-import { useMutation } from 'react-query';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useState } from 'react';
-import { toast } from 'react-toastify';
 import {
   Button,
   MessageLabel,
@@ -12,42 +6,16 @@ import {
   FormHeader,
   TextField,
 } from '@sebek78-nx/ui';
-import { registerSchema, toastConfig } from '@sebek78-nx/util';
-import { ApiError, IRegisterFormInput } from '@sebek78-nx/types';
-import { registerUser } from '@sebek78-nx/data-access';
+import { useRegister } from '@sebek78-nx/data-access';
 
 export interface RegisterFormProps {
   closeForm: () => void;
 }
 
 export function RegisterForm({ closeForm }: RegisterFormProps) {
-  const [error, setError] = useState('');
-  const notify = (username: string) =>
-    toast.success(`Zarejestrowano ${username}. Zaloguj się.`, toastConfig);
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<IRegisterFormInput>({
-    resolver: yupResolver(registerSchema),
+  const { handleSubmit, onSubmit, error, errors, register } = useRegister({
+    closeForm,
   });
-
-  const mutation = useMutation(registerUser, {
-    onSuccess: ({ data }) => {
-      notify(data.username);
-      closeForm();
-    },
-    onError: (error: AxiosError<ApiError>) => {
-      setError(error.response?.data.message ?? 'Nieznany błąd');
-    },
-  });
-
-  const onSubmit: SubmitHandler<IRegisterFormInput> = (
-    data: IRegisterFormInput
-  ) => {
-    mutation.mutate(data);
-  };
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>

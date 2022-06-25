@@ -1,8 +1,4 @@
-import { AxiosError } from 'axios';
-import { useMutation } from 'react-query';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { Dispatch, useState } from 'react';
+import { Dispatch } from 'react';
 import {
   Button,
   MessageLabel,
@@ -11,11 +7,8 @@ import {
   FormHeader,
   TextField,
 } from '@sebek78-nx/ui';
-import { loginSchema } from '@sebek78-nx/util';
-
-import { User, ILoginFormInput, ApiError } from '@sebek78-nx/types';
-import { loginUser } from '@sebek78-nx/data-access';
-import { STORAGE_KEY } from '@sebek78-nx/util';
+import { User } from '@sebek78-nx/types';
+import { useLogin } from '@sebek78-nx/data-access';
 
 export interface LoginFormProps {
   closeForm: () => void;
@@ -23,30 +16,10 @@ export interface LoginFormProps {
 }
 
 export function LoginForm({ closeForm, setUser }: LoginFormProps) {
-  const [error, setError] = useState('');
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<ILoginFormInput>({
-    resolver: yupResolver(loginSchema),
+  const { handleSubmit, onSubmit, error, errors, register } = useLogin({
+    closeForm,
+    setUser,
   });
-
-  const mutation = useMutation(loginUser, {
-    onSuccess: ({ data }) => {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(data.user));
-      closeForm();
-      setUser(data.user);
-    },
-    onError: (error: AxiosError<ApiError>) => {
-      setError(error.response?.data.message ?? 'Nieznany błąd');
-    },
-  });
-
-  const onSubmit: SubmitHandler<ILoginFormInput> = (data: ILoginFormInput) => {
-    mutation.mutate(data);
-  };
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
