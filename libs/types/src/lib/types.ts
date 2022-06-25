@@ -30,3 +30,9 @@ export interface RegisterSuccessResponse {
 export interface LoginSuccess {
   user: User;
 }
+
+export interface ApiError {
+  error: string;
+  message: string;
+  statusCode: number;
+}

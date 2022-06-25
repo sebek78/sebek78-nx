@@ -1,13 +1,23 @@
 import styled from 'styled-components';
 
-export interface ErrorLabelProps {
+export interface MessageLabelProps {
   message?: string;
+  type?: string;
 }
 
-const StyledErrorLabel = styled.div`
+const StyledMessageLabel = styled.div<{ type: string }>`
   display: block;
   margin: ${({ theme }) => theme.spacing(1)} 0;
-  color: ${({ theme }) => theme.palette.text.danger};
+  color: ${({ theme, type }) => {
+    switch (type) {
+      case 'error':
+        return theme.palette.text.danger;
+      case 'success':
+        return theme.palette.text.success;
+      default:
+        return theme.palette.text.default;
+    }
+  }};
   font-size: ${({ theme }) => theme.typography.mobile.body1.fontSize};
   line-height: ${({ theme }) => theme.typography.mobile.body1.lineHeight};
   width: 100%;
@@ -18,10 +28,8 @@ const StyledErrorLabel = styled.div`
   }
 `;
 
-export function ErrorLabel({ message }: ErrorLabelProps) {
+export function MessageLabel({ message, type = 'default' }: MessageLabelProps) {
   if (!message) return null;
 
-  return <StyledErrorLabel>{message}</StyledErrorLabel>;
+  return <StyledMessageLabel type={type}>{message}</StyledMessageLabel>;
 }
-
-export default ErrorLabel;

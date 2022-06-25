@@ -5,15 +5,15 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import {
   Button,
   CloseIcon,
-  ErrorLabel,
+  MessageLabel,
   Flexbox,
   FormLabel,
   InputLabel,
   TextInput,
 } from '@sebek78-nx/ui';
 import { loginSchema } from '@sebek78-nx/util';
-import { Dispatch } from 'react';
-import { User, ILoginFormInput } from '@sebek78-nx/types';
+import { Dispatch, useState } from 'react';
+import { User, ILoginFormInput, ApiError } from '@sebek78-nx/types';
 import { loginUser } from '@sebek78-nx/data-access';
 import { Form } from '@sebek78-nx/ui';
 import { STORAGE_KEY } from '@sebek78-nx/util';
@@ -24,6 +24,8 @@ export interface LoginFormProps {
 }
 
 export function LoginForm({ closeForm, setUser }: LoginFormProps) {
+  const [error, setError] = useState('');
+
   const {
     register,
     handleSubmit,
@@ -38,9 +40,8 @@ export function LoginForm({ closeForm, setUser }: LoginFormProps) {
       closeForm();
       setUser(data.user);
     },
-    onError: (error: AxiosError) => {
-      // TODO: show login incorrect message
-      console.log(error.response?.data);
+    onError: (error: AxiosError<ApiError>) => {
+      setError(error.response?.data.message ?? 'Nieznany błąd');
     },
   });
 
@@ -54,11 +55,12 @@ export function LoginForm({ closeForm, setUser }: LoginFormProps) {
         <FormLabel text="Logowanie" />
         <CloseIcon onClick={closeForm} />
       </Flexbox>
+      {error && <MessageLabel message={error} type="error" />}
       <InputLabel text="Nazwa użytkownika" />
-      <ErrorLabel message={errors.username?.message} />
+      <MessageLabel message={errors.username?.message} type="error" />
       <TextInput register={register} label="username" />
       <InputLabel text="Hasło" />
-      <ErrorLabel message={errors.password?.message} />
+      <MessageLabel message={errors.password?.message} type="error" />
       <TextInput register={register} label="password" type="password" />
       <Flexbox>
         <Button

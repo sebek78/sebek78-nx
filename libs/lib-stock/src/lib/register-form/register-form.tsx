@@ -5,22 +5,24 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import {
   Button,
   CloseIcon,
-  ErrorLabel,
+  MessageLabel,
   Flexbox,
   FormLabel,
   InputLabel,
   TextInput,
 } from '@sebek78-nx/ui';
 import { registerSchema } from '@sebek78-nx/util';
-import { IRegisterFormInput } from '@sebek78-nx/types';
+import { ApiError, IRegisterFormInput } from '@sebek78-nx/types';
 import { registerUser } from '@sebek78-nx/data-access';
 import { Form } from '@sebek78-nx/ui';
+import { useState } from 'react';
 
 export interface RegisterFormProps {
   closeForm: () => void;
 }
 
 export function RegisterForm({ closeForm }: RegisterFormProps) {
+  const [error, setError] = useState('');
   const {
     register,
     handleSubmit,
@@ -35,9 +37,8 @@ export function RegisterForm({ closeForm }: RegisterFormProps) {
       console.log(data);
       closeForm();
     },
-    onError: (error: AxiosError) => {
-      // TODO: show register incorrect message
-      console.log(error.response?.data);
+    onError: (error: AxiosError<ApiError>) => {
+      setError(error.response?.data.message ?? 'Nieznany błąd');
     },
   });
 
@@ -53,14 +54,15 @@ export function RegisterForm({ closeForm }: RegisterFormProps) {
         <FormLabel text="Rejestracja" />
         <CloseIcon onClick={closeForm} />
       </Flexbox>
+      {error && <MessageLabel message={error} type="error" />}
       <InputLabel text="Nazwa użytkownika" />
-      <ErrorLabel message={errors.username?.message} />
+      <MessageLabel message={errors.username?.message} type="error" />
       <TextInput register={register} label="username" />
       <InputLabel text="Hasło" />
-      <ErrorLabel message={errors.password?.message} />
+      <MessageLabel message={errors.password?.message} type="error" />
       <TextInput register={register} label="password" type="password" />
       <InputLabel text="Powtórz hasło" />
-      <ErrorLabel message={errors.password2?.message} />
+      <MessageLabel message={errors.password2?.message} type="error" />
       <TextInput register={register} label="password2" type="password" />
       <Flexbox>
         <Button
