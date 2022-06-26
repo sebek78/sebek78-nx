@@ -1,6 +1,8 @@
 import { memo } from 'react';
 import styled from 'styled-components';
 import { useApiQuery } from '@sebek78-nx/data-access';
+import { Routes, Route } from 'react-router-dom';
+import { UserProfile } from '../user-profile/user-profile';
 
 const StyledMainPage = styled.div`
   color: pink;
@@ -16,7 +18,10 @@ export const MainPage = memo(function MainPage() {
 
   return (
     <StyledMainPage>
-      <h1>Welcome to MainPage!</h1>
+      <Routes>
+        <Route path="/" element={<h1>Main Page</h1>} />
+        <Route path="profile" element={<UserProfile />} />
+      </Routes>
     </StyledMainPage>
   );
 });

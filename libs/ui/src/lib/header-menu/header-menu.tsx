@@ -3,6 +3,7 @@ import { User } from '@sebek78-nx/types';
 import { Button } from '../atoms/button/button';
 import { Flexbox } from '../atoms/flexbox/flexbox';
 import { LinkButton } from '../atoms/link-button/link-button';
+import { PersonIcon } from '../icons/person-icon/person-icon';
 
 interface HeaderMenuProps {
   openLoginForm: () => void;
@@ -11,6 +12,7 @@ interface HeaderMenuProps {
   isOpenRegisterForm: boolean;
   user: User;
   logout: () => void;
+  goToProfile: () => void;
 }
 
 const StyledHeaderMenu = styled.div`
@@ -28,6 +30,7 @@ export function HeaderMenu({
   isOpenRegisterForm,
   user,
   logout,
+  goToProfile,
 }: HeaderMenuProps) {
   return (
     <StyledHeaderMenu>
@@ -39,6 +42,7 @@ export function HeaderMenu({
       )}
       {user.username && (
         <Flexbox>
+          <PersonIcon onClick={goToProfile} />
           <LinkButton onClick={logout} label="Wyloguj" />
         </Flexbox>
       )}
