@@ -14,7 +14,13 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@sebek78-nx/data-access": ["libs/data-access/src/index.ts"],
+      "@sebek78-nx/lib-stock": ["libs/lib-stock/src/index.ts"],
+      "@sebek78-nx/types": ["libs/types/src/index.ts"],
+      "@sebek78-nx/ui": ["libs/ui/src/index.ts"],
+      "@sebek78-nx/util": ["libs/util/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

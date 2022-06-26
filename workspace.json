@@ -1,8 +1,13 @@
 {
   "version": 2,
   "projects": {
+    "data-access": "libs/data-access",
+    "lib-stock": "libs/lib-stock",
     "stock": "apps/stock",
     "stock-api": "apps/stock-api",
-    "stock-e2e": "apps/stock-e2e"
+    "stock-e2e": "apps/stock-e2e",
+    "types": "libs/types",
+    "ui": "libs/ui",
+    "util": "libs/util"
   }
 }

@@ -28,7 +28,7 @@ export class AppController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get('auth/logout')
+  @Post('auth/logout')
   async logout(
     @Req() req: RequestWithUser,
     @Res({ passthrough: true }) response: Response

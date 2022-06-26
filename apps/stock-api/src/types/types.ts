@@ -2,6 +2,11 @@ import { User } from '@prisma/client';
 
 export type UserData = Pick<User, 'id' | 'username' | 'role'>;
 export type TokenPayload = UserData & { iat: number; exp: number };
+export type RefreshTokenPayload = {
+  username: string;
+  iat: number;
+  exp: number;
+};
 
 export interface RequestWithUserData extends Request {
   user: UserData;

@@ -20,4 +20,6 @@ export class CreateUserDto {
     message: 'Hasło jest za długie. Maksymalnie 40 znaków',
   })
   password: string;
+
+  password2: string;
 }

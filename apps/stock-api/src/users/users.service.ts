@@ -19,6 +19,13 @@ export class UsersService {
   constructor(private prisma: PrismaService) {}
 
   async create(createUserDto: CreateUserDto) {
+    if (createUserDto.password !== createUserDto.password2) {
+      throw new HttpException(
+        'Hasła nie są identyczne',
+        HttpStatus.BAD_REQUEST
+      );
+    }
+
     const hashedPassword = await bcrypt.hash(
       createUserDto.password,
       saltOrRounds
