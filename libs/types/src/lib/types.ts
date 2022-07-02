@@ -19,6 +19,12 @@ export interface IRegisterFormInput {
   password2: string;
 }
 
+export interface IChangePasswordFormInput {
+  oldPassword: string;
+  newPassword: string;
+  newPassword2: string;
+}
+
 export interface SuccessResponse {
   success: boolean;
 }

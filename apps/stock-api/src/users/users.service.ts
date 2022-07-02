@@ -108,7 +108,7 @@ export class UsersService {
     let isPasswordMatching = false;
 
     isPasswordMatching = await bcrypt.compare(
-      updateUserPasswordDto.password,
+      updateUserPasswordDto.oldPassword,
       user.password
     );
 

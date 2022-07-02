@@ -35,3 +35,24 @@ export const registerSchema = yup
       .oneOf([yup.ref('password')], 'Wpisane hasła są różne.'),
   })
   .required();
+
+export const changePasswordSchema = yup
+  .object({
+    oldPassword: yup
+      .string()
+      .min(8, 'Wymagane jest co najmniej 8 znaków.')
+      .max(40, 'Maksymalnie 40 znaków.')
+      .required(),
+    newPassword: yup
+      .string()
+      .min(8, 'Wymagane jest co najmniej 8 znaków.')
+      .max(40, 'Maksymalnie 40 znaków.')
+      .required(),
+    newPassword2: yup
+      .string()
+      .min(8, 'Wymagane jest co najmniej 8 znaków.')
+      .max(40, 'Maksymalnie 40 znaków.')
+      .required()
+      .oneOf([yup.ref('newPassword')], 'Wpisane hasła są różne.'),
+  })
+  .required();

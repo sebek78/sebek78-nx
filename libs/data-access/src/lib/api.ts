@@ -1,5 +1,6 @@
 import { AxiosPromise, AxiosRequestConfig } from 'axios';
 import {
+  IChangePasswordFormInput,
   ILoginFormInput,
   IRegisterFormInput,
   LoginSuccess,
@@ -45,4 +46,12 @@ const registerUser = (data: IRegisterFormInput) =>
     data,
   }) as AxiosPromise<RegisterSuccessResponse>;
 
-export { getRefreshToken, loginUser, logoutUser, registerUser };
+const changePassword = (data: IChangePasswordFormInput) =>
+  axios({
+    ...defaultOptions,
+    method: 'patch',
+    url: `${API_URL}/users/new-password`,
+    data,
+  }) as AxiosPromise<LoginSuccess>;
+
+export { getRefreshToken, loginUser, logoutUser, registerUser, changePassword };
