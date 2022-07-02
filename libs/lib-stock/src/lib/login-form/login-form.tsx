@@ -1,6 +1,7 @@
 import { Dispatch } from 'react';
 import {
   Button,
+  Card,
   MessageLabel,
   Form,
   Flexbox,
@@ -23,31 +24,33 @@ export function LoginForm({ closeForm, setUser }: LoginFormProps) {
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
-      <FormHeader label="Logowanie" onClose={closeForm} />
-      {error && <MessageLabel message={error} type="error" />}
-      <TextField
-        labelText="Nazwa użytkownika"
-        message={errors.username?.message}
-        messageType="error"
-        register={register}
-        inputLabel="username"
-      />
-      <TextField
-        labelText="Hasło"
-        message={errors.password?.message}
-        messageType="error"
-        register={register}
-        inputLabel="password"
-        type="password"
-      />
-      <Flexbox>
-        <Button
-          variant="success"
-          label="Zaloguj"
-          onClick={() => undefined}
-          type="submit"
+      <Card>
+        <FormHeader label="Logowanie" onClose={closeForm} />
+        {error && <MessageLabel message={error} type="error" />}
+        <TextField
+          labelText="Nazwa użytkownika"
+          message={errors.username?.message}
+          messageType="error"
+          register={register}
+          inputLabel="username"
         />
-      </Flexbox>
+        <TextField
+          labelText="Hasło"
+          message={errors.password?.message}
+          messageType="error"
+          register={register}
+          inputLabel="password"
+          type="password"
+        />
+        <Flexbox>
+          <Button
+            variant="success"
+            label="Zaloguj"
+            onClick={() => undefined}
+            type="submit"
+          />
+        </Flexbox>
+      </Card>
     </Form>
   );
 }

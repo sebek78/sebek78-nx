@@ -1,5 +1,6 @@
 import {
   Button,
+  Card,
   MessageLabel,
   Flexbox,
   Form,
@@ -19,39 +20,41 @@ export function RegisterForm({ closeForm }: RegisterFormProps) {
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
-      <FormHeader label="Rejestracja" onClose={closeForm} />
-      {error && <MessageLabel message={error} type="error" />}
-      <TextField
-        labelText="Nazwa użytkownika"
-        message={errors.username?.message}
-        messageType="error"
-        register={register}
-        inputLabel="username"
-      />
-      <TextField
-        labelText="Hasło"
-        message={errors.password?.message}
-        messageType="error"
-        register={register}
-        inputLabel="password"
-        type="password"
-      />
-      <TextField
-        labelText="Powtórz hasło"
-        message={errors.password2?.message}
-        messageType="error"
-        register={register}
-        inputLabel="password2"
-        type="password"
-      />
-      <Flexbox>
-        <Button
-          variant="success"
-          label="Rejestruj"
-          onClick={() => undefined}
-          type="submit"
+      <Card>
+        <FormHeader label="Rejestracja" onClose={closeForm} />
+        {error && <MessageLabel message={error} type="error" />}
+        <TextField
+          labelText="Nazwa użytkownika"
+          message={errors.username?.message}
+          messageType="error"
+          register={register}
+          inputLabel="username"
         />
-      </Flexbox>
+        <TextField
+          labelText="Hasło"
+          message={errors.password?.message}
+          messageType="error"
+          register={register}
+          inputLabel="password"
+          type="password"
+        />
+        <TextField
+          labelText="Powtórz hasło"
+          message={errors.password2?.message}
+          messageType="error"
+          register={register}
+          inputLabel="password2"
+          type="password"
+        />
+        <Flexbox>
+          <Button
+            variant="success"
+            label="Rejestruj"
+            onClick={() => undefined}
+            type="submit"
+          />
+        </Flexbox>
+      </Card>
     </Form>
   );
 }

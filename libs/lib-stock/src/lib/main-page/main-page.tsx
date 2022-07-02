@@ -1,14 +1,14 @@
 import { memo } from 'react';
-import styled from 'styled-components';
 import { useApiQuery } from '@sebek78-nx/data-access';
 import { Routes, Route } from 'react-router-dom';
 import { UserProfile } from '../user-profile/user-profile';
+import { User } from '@sebek78-nx/types';
 
-const StyledMainPage = styled.div`
-  color: pink;
-`;
+interface MainPageProps {
+  user: User;
+}
 
-export const MainPage = memo(function MainPage() {
+export const MainPage = memo(function MainPage({ user }: MainPageProps) {
   const { data, error, isError, isLoading, isSuccess } = useApiQuery(
     'testData',
     '/'
@@ -17,11 +17,11 @@ export const MainPage = memo(function MainPage() {
   console.log(new Date().toLocaleTimeString(), data);
 
   return (
-    <StyledMainPage>
+    <main>
       <Routes>
         <Route path="/" element={<h1>Main Page</h1>} />
-        <Route path="profile" element={<UserProfile />} />
+        <Route path="profile" element={<UserProfile user={user} />} />
       </Routes>
-    </StyledMainPage>
+    </main>
   );
 });
