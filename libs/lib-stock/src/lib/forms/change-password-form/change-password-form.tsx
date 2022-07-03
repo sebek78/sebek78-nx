@@ -44,12 +44,7 @@ export function ChangePasswordForm({ onClose }: ChangePasswordFormProps) {
         type="password"
       />
       <Flexbox>
-        <Button
-          variant="success"
-          label="Wyślij"
-          onClick={() => undefined}
-          type="submit"
-        />
+        <Button variant="success" label="Wyślij" type="submit" />
       </Flexbox>
     </form>
   );

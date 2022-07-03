@@ -43,12 +43,7 @@ export function LoginForm({ closeForm, setUser }: LoginFormProps) {
           type="password"
         />
         <Flexbox>
-          <Button
-            variant="success"
-            label="Zaloguj"
-            onClick={() => undefined}
-            type="submit"
-          />
+          <Button variant="success" label="Zaloguj" type="submit" />
         </Flexbox>
       </Card>
     </Form>

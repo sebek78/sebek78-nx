@@ -4,7 +4,7 @@ export type ButtonVariant = 'accent' | 'success';
 
 export interface ButtonProps {
   label: string;
-  onClick: () => void;
+  onClick?: () => void;
   variant?: ButtonVariant;
   type?: 'submit' | 'button';
 }

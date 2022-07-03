@@ -47,12 +47,7 @@ export function RegisterForm({ closeForm }: RegisterFormProps) {
           type="password"
         />
         <Flexbox>
-          <Button
-            variant="success"
-            label="Rejestruj"
-            onClick={() => undefined}
-            type="submit"
-          />
+          <Button variant="success" label="Rejestruj" type="submit" />
         </Flexbox>
       </Card>
     </Form>
