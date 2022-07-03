@@ -107,6 +107,15 @@ export class UsersService {
   ) {
     let isPasswordMatching = false;
 
+    if (
+      updateUserPasswordDto.newPassword !== updateUserPasswordDto.newPassword2
+    ) {
+      throw new HttpException(
+        'Hasła nie są identyczne',
+        HttpStatus.BAD_REQUEST
+      );
+    }
+
     isPasswordMatching = await bcrypt.compare(
       updateUserPasswordDto.oldPassword,
       user.password

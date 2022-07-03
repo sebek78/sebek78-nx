@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ApiError, IChangePasswordFormInput } from '@sebek78-nx/types';
-import { changePasswordSchema } from '@sebek78-nx/util';
+import { changePasswordSchema, successToast } from '@sebek78-nx/util';
 import { AxiosError } from 'axios';
 import { useState } from 'react';
 import {
@@ -36,7 +36,7 @@ export function useChangePassword(onClose: () => void): UseChangePassword {
     onSuccess: ({ data }) => {
       console.log(data);
       onClose();
-      // TODO: toast
+      successToast('Hasło zostało zmienione');
     },
     onError: (error: AxiosError<ApiError>) => {
       setError(error.response?.data.message ?? 'Nieznany błąd');
