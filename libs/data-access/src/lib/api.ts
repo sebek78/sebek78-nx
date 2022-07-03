@@ -54,4 +54,18 @@ const changePassword = (data: IChangePasswordFormInput) =>
     data,
   }) as AxiosPromise<LoginSuccess>;
 
-export { getRefreshToken, loginUser, logoutUser, registerUser, changePassword };
+const deleteUser = () =>
+  axios({
+    ...defaultOptions,
+    method: 'delete',
+    url: `${API_URL}/users/delete`,
+  }) as AxiosPromise<LoginSuccess>;
+
+export {
+  getRefreshToken,
+  loginUser,
+  logoutUser,
+  registerUser,
+  changePassword,
+  deleteUser,
+};

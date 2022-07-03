@@ -25,6 +25,10 @@ export interface IChangePasswordFormInput {
   newPassword2: string;
 }
 
+export interface IDeleteUserFormInput {
+  username: string;
+}
+
 export interface SuccessResponse {
   success: boolean;
 }

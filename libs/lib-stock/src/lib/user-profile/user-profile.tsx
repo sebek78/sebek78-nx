@@ -10,6 +10,7 @@ import {
 } from '@sebek78-nx/ui';
 import { useState } from 'react';
 import { ChangePasswordForm } from '../forms/change-password-form/change-password-form';
+import { DeleteUserForm } from '../forms/delete-user-form/delete-user-form';
 
 export interface UserProfileProps {
   user: User;
@@ -17,12 +18,20 @@ export interface UserProfileProps {
 
 export function UserProfile({ user }: UserProfileProps) {
   const [showChangePasswordForm, setShowChangePasswordForm] = useState(false);
+  const [showDeleteUserForm, setShowDeleteUserForm] = useState(false);
 
   const handlePasswordChange = () => {
     setShowChangePasswordForm(true);
   };
   const closePasswordChangeForm = () => {
     setShowChangePasswordForm(false);
+  };
+
+  const handleShowDeleteUserForm = () => {
+    setShowDeleteUserForm(true);
+  };
+  const closeDeleteUserForm = () => {
+    setShowDeleteUserForm(false);
   };
 
   return (
@@ -34,12 +43,23 @@ export function UserProfile({ user }: UserProfileProps) {
           <Separator />
           <Text>{`Użytkownik: ${user.username}`}</Text>
           <Separator />
-          {showChangePasswordForm ? (
+          {showChangePasswordForm && (
             <ChangePasswordForm onClose={closePasswordChangeForm} />
-          ) : (
+          )}
+          {showDeleteUserForm && (
+            <DeleteUserForm
+              closeForm={closeDeleteUserForm}
+              username={user.username}
+            />
+          )}
+          {!showChangePasswordForm && !showDeleteUserForm && (
             <Flexbox>
               <Button label={'Zmiana hasła'} onClick={handlePasswordChange} />
-              <Button label={'Usuń konto'} onClick={() => undefined} />
+              <Button
+                variant="danger"
+                label={'Usuń konto'}
+                onClick={handleShowDeleteUserForm}
+              />
             </Flexbox>
           )}
         </Card>

@@ -1,3 +1,4 @@
+export * from './lib/forms/delete-user-form/delete-user-form';
 export * from './lib/forms/change-password-form/change-password-form';
 export * from './lib/user-profile/user-profile';
 export * from './lib/forms/register-form/register-form';

@@ -1,4 +1,5 @@
 import * as yup from 'yup';
+import { AnyObject } from 'yup/lib/types';
 
 export const loginSchema = yup
   .object({
@@ -54,5 +55,21 @@ export const changePasswordSchema = yup
       .max(40, 'Maksymalnie 40 znaków.')
       .required()
       .oneOf([yup.ref('newPassword')], 'Wpisane hasła są różne.'),
+  })
+  .required();
+
+export const deleteUserSchema = yup
+  .object({
+    username: yup
+      .string()
+      .min(4, 'Wymagane są co najmniej 4 znaki.')
+      .max(32, 'Maksymalnie 32 znaki.')
+      .test(
+        'username',
+        'Zła nazwa użytkownika',
+        (value: string | undefined, context: yup.TestContext<AnyObject>) =>
+          value === context.options.context?.['username']
+      )
+      .required(),
   })
   .required();
