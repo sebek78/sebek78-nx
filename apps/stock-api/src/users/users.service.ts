@@ -11,6 +11,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import { Prisma, User } from '@prisma/client';
 import { ErrorMessages, PrismaErrors } from '../prisma/prisma-helpers';
 import { UpdateRefreshToken } from '../types/types';
+import { DeleteUserDTO } from './dto/delete-user.dto';
 
 const saltOrRounds = 10; // bcrypt
 
@@ -137,5 +138,17 @@ export class UsersService {
     } else {
       throw new BadRequestException('Password is invalid.');
     }
+  }
+
+  async deleteUser(user: User, deleteUserDto: DeleteUserDTO) {
+    if (user.username !== deleteUserDto.username) {
+      throw new HttpException('Zła nazwa użytkownika', HttpStatus.BAD_REQUEST);
+    }
+
+    return this.prisma.user.delete({
+      where: {
+        username: deleteUserDto.username,
+      },
+    });
   }
 }

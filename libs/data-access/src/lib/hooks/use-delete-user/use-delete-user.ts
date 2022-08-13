@@ -1,5 +1,5 @@
-import { ApiError, IDeleteUserFormInput } from '@sebek78-nx/types';
-import { useState } from 'react';
+import { ApiError, IDeleteUserFormInput, User } from '@sebek78-nx/types';
+import { Dispatch, SetStateAction, useState } from 'react';
 import {
   FieldErrors,
   SubmitHandler,
@@ -8,10 +8,12 @@ import {
   UseFormRegister,
 } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { deleteUserSchema, STORAGE_KEY } from '@sebek78-nx/util';
+import { deleteUserSchema, guest, STORAGE_KEY } from '@sebek78-nx/util';
 import { useMutation } from 'react-query';
 import { deleteUser } from '../../api';
 import { AxiosError } from 'axios';
+import { successToast } from '@sebek78-nx/util';
+import { useNavigate } from 'react-router-dom';
 
 export interface UseDeleteUser {
   handleSubmit: UseFormHandleSubmit<IDeleteUserFormInput>;
@@ -21,8 +23,12 @@ export interface UseDeleteUser {
   register: UseFormRegister<IDeleteUserFormInput>;
 }
 
-export function useDeleteUser(username: string): UseDeleteUser {
+export function useDeleteUser(
+  username: string,
+  setUser: Dispatch<SetStateAction<User>>
+): UseDeleteUser {
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const {
     register,
@@ -35,17 +41,22 @@ export function useDeleteUser(username: string): UseDeleteUser {
 
   const mutation = useMutation(deleteUser, {
     onSuccess: ({ data }) => {
-      // localStorage.removeItem(STORAGE_KEY);
-      console.log(data);
-      // TODO: navigate to main path, toast
+      if (data.success) {
+        localStorage.removeItem(STORAGE_KEY);
+        successToast('Konto zostało usunięte.');
+        setUser(guest);
+        navigate('/');
+      }
     },
     onError: (error: AxiosError<ApiError>) => {
       setError(error.response?.data.message ?? 'Nieznany błąd');
     },
   });
 
-  const onSubmit: SubmitHandler<IDeleteUserFormInput> = () => {
-    mutation.mutate();
+  const onSubmit: SubmitHandler<IDeleteUserFormInput> = (
+    data: IDeleteUserFormInput
+  ) => {
+    mutation.mutate(data);
   };
 
   return { handleSubmit, onSubmit, error, errors, register };

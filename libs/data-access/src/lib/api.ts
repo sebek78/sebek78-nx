@@ -1,6 +1,7 @@
 import { AxiosPromise, AxiosRequestConfig } from 'axios';
 import {
   IChangePasswordFormInput,
+  IDeleteUserFormInput,
   ILoginFormInput,
   IRegisterFormInput,
   LoginSuccess,
@@ -54,12 +55,14 @@ const changePassword = (data: IChangePasswordFormInput) =>
     data,
   }) as AxiosPromise<LoginSuccess>;
 
-const deleteUser = () =>
+const deleteUser = (data: IDeleteUserFormInput) =>
   axios({
     ...defaultOptions,
     method: 'delete',
     url: `${API_URL}/users/delete`,
-  }) as AxiosPromise<LoginSuccess>;
+    withCredentials: true,
+    data,
+  }) as AxiosPromise<SuccessResponse>;
 
 export {
   getRefreshToken,

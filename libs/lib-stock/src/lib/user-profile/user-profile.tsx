@@ -8,15 +8,16 @@ import {
   Separator,
   Text,
 } from '@sebek78-nx/ui';
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import { ChangePasswordForm } from '../forms/change-password-form/change-password-form';
 import { DeleteUserForm } from '../forms/delete-user-form/delete-user-form';
 
 export interface UserProfileProps {
   user: User;
+  setUser: Dispatch<SetStateAction<User>>;
 }
 
-export function UserProfile({ user }: UserProfileProps) {
+export function UserProfile({ user, setUser }: UserProfileProps) {
   const [showChangePasswordForm, setShowChangePasswordForm] = useState(false);
   const [showDeleteUserForm, setShowDeleteUserForm] = useState(false);
 
@@ -50,6 +51,7 @@ export function UserProfile({ user }: UserProfileProps) {
             <DeleteUserForm
               closeForm={closeDeleteUserForm}
               username={user.username}
+              setUser={setUser}
             />
           )}
           {!showChangePasswordForm && !showDeleteUserForm && (

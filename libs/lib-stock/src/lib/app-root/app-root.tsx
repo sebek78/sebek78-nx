@@ -37,7 +37,7 @@ export function AppRoot() {
     <StyledAppRoot>
       <Header user={user} setUser={setUser} />
       {user.role === 'GUEST' && <Homepage />}
-      {user.role === 'USER' && <MainPage user={user} />}
+      {user.role === 'USER' && <MainPage user={user} setUser={setUser} />}
       {user.role === 'ADMIN' && <AdminPage />}
     </StyledAppRoot>
   );
