@@ -3,6 +3,9 @@ import { useApiQuery } from '@sebek78-nx/data-access';
 import { Routes, Route } from 'react-router-dom';
 import { UserProfile } from '../user-profile/user-profile';
 import { User } from '@sebek78-nx/types';
+import { Dashboard } from '../dashboard/dashboard';
+import { Companies } from '../companies/companies';
+import { Menu } from '../menu/menu';
 
 interface MainPageProps {
   user: User;
@@ -22,12 +25,14 @@ export const MainPage = memo(function MainPage({
 
   return (
     <main>
+      <Menu />
       <Routes>
-        <Route path="/" element={<h1>Main Page</h1>} />
+        <Route path="/" element={<Dashboard />} />
         <Route
           path="profile"
           element={<UserProfile user={user} setUser={setUser} />}
         />
+        <Route path="companies" element={<Companies />} />
       </Routes>
     </main>
   );

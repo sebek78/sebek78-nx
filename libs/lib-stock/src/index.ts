@@ -8,3 +8,6 @@ export * from './lib/forms/login-form/login-form';
 export * from './lib/homepage/homepage';
 export * from './lib/header/header';
 export * from './lib/app-root/app-root';
+export * from './lib/dashboard/dashboard';
+export * from './lib/menu/menu';
+export * from './lib/companies/companies';
