@@ -9,8 +9,7 @@ import {
 } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
-import { toast } from 'react-toastify';
-import { registerSchema, toastConfig } from '@sebek78-nx/util';
+import { registerSchema, successToast } from '@sebek78-nx/util';
 import { ApiError, IRegisterFormInput } from '@sebek78-nx/types';
 import { registerUser } from '../../api';
 
@@ -31,7 +30,7 @@ export function useRegister({
 }: UseRegisterArgs): UseRegister<IRegisterFormInput> {
   const [error, setError] = useState('');
   const notify = (username: string) =>
-    toast.success(`Zarejestrowano ${username}. Zaloguj się.`, toastConfig);
+    successToast(`Zarejestrowano ${username}. Zaloguj się.`);
 
   const {
     register,

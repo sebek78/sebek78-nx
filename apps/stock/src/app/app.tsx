@@ -4,6 +4,7 @@ import { GlobalStyle, theme } from '@sebek78-nx/util';
 import { AppRoot } from '@sebek78-nx/lib-stock';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { BrowserRouter } from 'react-router-dom';
 
 const queryClient = new QueryClient();
 
@@ -12,7 +13,9 @@ export function App() {
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <QueryClientProvider client={queryClient}>
-        <AppRoot />
+        <BrowserRouter>
+          <AppRoot />
+        </BrowserRouter>
         <ToastContainer />
       </QueryClientProvider>
     </ThemeProvider>

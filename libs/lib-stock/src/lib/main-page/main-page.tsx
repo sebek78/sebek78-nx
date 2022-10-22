@@ -1,12 +1,18 @@
-import { memo } from 'react';
-import styled from 'styled-components';
+import { Dispatch, memo, SetStateAction } from 'react';
 import { useApiQuery } from '@sebek78-nx/data-access';
+import { Routes, Route } from 'react-router-dom';
+import { UserProfile } from '../user-profile/user-profile';
+import { User } from '@sebek78-nx/types';
 
-const StyledMainPage = styled.div`
-  color: pink;
-`;
+interface MainPageProps {
+  user: User;
+  setUser: Dispatch<SetStateAction<User>>;
+}
 
-export const MainPage = memo(function MainPage() {
+export const MainPage = memo(function MainPage({
+  user,
+  setUser,
+}: MainPageProps) {
   const { data, error, isError, isLoading, isSuccess } = useApiQuery(
     'testData',
     '/'
@@ -15,8 +21,14 @@ export const MainPage = memo(function MainPage() {
   console.log(new Date().toLocaleTimeString(), data);
 
   return (
-    <StyledMainPage>
-      <h1>Welcome to MainPage!</h1>
-    </StyledMainPage>
+    <main>
+      <Routes>
+        <Route path="/" element={<h1>Main Page</h1>} />
+        <Route
+          path="profile"
+          element={<UserProfile user={user} setUser={setUser} />}
+        />
+      </Routes>
+    </main>
   );
 });

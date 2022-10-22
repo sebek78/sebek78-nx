@@ -38,3 +38,28 @@ model User {
 
   @@map("users")
 }
+
+model Sector {
+  id          Int       @id @default(autoincrement())
+  sectorId    Int       @unique @map("sector_id")
+  description String
+  Company     Company[]
+
+  @@map("sectors")
+}
+
+model Company {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  shortcut    String   @unique
+  since       String
+  full_name   String
+  sectorId    Int      @map("sector_id")
+  isin        String   @unique
+  treasury    Float // percent
+  marketValue Float    @map("market_value") // million PLN
+  updated     DateTime @default(now())
+  Sector      Sector   @relation(fields: [sectorId], references: [id])
+
+  @@map("companies")
+}

@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-export type ButtonVariant = 'accent' | 'success';
+export type ButtonVariant = 'accent' | 'success' | 'danger';
 
 export interface ButtonProps {
   label: string;
-  onClick: () => void;
+  onClick?: () => void;
   variant?: ButtonVariant;
   type?: 'submit' | 'button';
 }
@@ -23,6 +23,8 @@ const StyledButton = styled.button<{ variant: ButtonVariant }>`
     switch (variant) {
       case 'accent':
         return theme.palette.background.accentEmphasis;
+      case 'danger':
+        return theme.palette.background.dangerEmphasis;
       default:
         return theme.palette.background.successEmphasis;
     }
@@ -34,6 +36,8 @@ const StyledButton = styled.button<{ variant: ButtonVariant }>`
     switch (variant) {
       case 'accent':
         return theme.palette.border.accent;
+      case 'danger':
+        return theme.palette.border.danger;
       default:
         return theme.palette.border.success;
     }

@@ -16,6 +16,8 @@ export const theme: DefaultTheme = {
       /* colors */
       accentSubtle: 'rgba(56,139,253,0.15)',
       accentEmphasis: '#1f6feb',
+      dangerSubtle: ' rgba(248,81,73,0.15)',
+      dangerEmphasis: '#da3633',
       successSubtle: 'rgba(46,160,67,0.15)',
       successEmphasis: '#238636',
     },
@@ -23,6 +25,7 @@ export const theme: DefaultTheme = {
       default: '#30363d',
       accent: '#1f6feb',
       success: '#238636',
+      danger: '#da3633',
     },
     text: {
       default: '#f0f3f6',

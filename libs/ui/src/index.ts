@@ -1,3 +1,7 @@
+export * from './lib/atoms/text/text';
+export * from './lib/atoms/separator/separator';
+export * from './lib/atoms/card/card';
+export * from './lib/icons/person-icon/person-icon';
 export * from './lib/molecules/text-field/text-field';
 export * from './lib/molecules/form-header/form-header';
 export * from './lib/atoms/form/form';
