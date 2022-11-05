@@ -11,6 +11,7 @@ const StyledMenu = styled.div`
   line-height: 40px;
   padding: 0 ${(props) => props.theme.spacing(4)};
   border-bottom: 2px solid ${(props) => props.theme.palette.border.default};
+  background-color: ${(props) => props.theme.palette.background.default};
   & a {
     color: ${(props) => props.theme.palette.text.accent};
     text-decoration: none;

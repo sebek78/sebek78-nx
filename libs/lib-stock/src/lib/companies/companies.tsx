@@ -1,16 +1,42 @@
-import styled from 'styled-components';
+import { useCompanies } from '@sebek78-nx/data-access';
+import { Flexbox } from '@sebek78-nx/ui';
+import { Menu } from '../menu/menu';
+import { Page, TableCell } from '@sebek78-nx/ui';
 
-/* eslint-disable-next-line */
-export interface CompaniesProps {}
+export function Companies() {
+  const { data: companies, isLoading, isError, error } = useCompanies();
 
-const StyledCompanies = styled.div`
-  color: pink;
-`;
+  console.log(companies);
 
-export function Companies(props: CompaniesProps) {
+  if (isLoading) {
+    return <span>Loading...</span>;
+  }
+  if (isError) {
+    return <span>Error: {error?.message}</span>;
+  }
+
+  // TODO: table components
+
   return (
-    <StyledCompanies>
-      <h1>Spółki</h1>
-    </StyledCompanies>
+    <Page>
+      <Menu />
+      <Flexbox>
+        <table>
+          {companies?.map((company) => (
+            <tr key={company.id}>
+              <TableCell data={company.name} />
+              <TableCell data={company.marketValue} />
+              <TableCell
+                data={company.treasury}
+                color={company.treasury > 0 ? 'danger' : undefined}
+              />
+              <TableCell
+                data={new Date(company.updated).toLocaleDateString('pl')}
+              />
+            </tr>
+          ))}
+        </table>
+      </Flexbox>
+    </Page>
   );
 }

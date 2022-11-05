@@ -1,4 +1,17 @@
+import { ThemeTextColorKeys } from '@sebek78-nx/types';
 import { DefaultTheme } from 'styled-components';
+
+type ThemeTextColor = {
+  [k in ThemeTextColorKeys]: string;
+};
+
+const text: ThemeTextColor = {
+  default: '#f0f3f6',
+  accent: '#58a6ff',
+  attention: '#d29922',
+  secondary: '#a371f7',
+  danger: '#f85149',
+};
 
 export const theme: DefaultTheme = {
   breakpoints: {
@@ -27,13 +40,7 @@ export const theme: DefaultTheme = {
       success: '#238636',
       danger: '#da3633',
     },
-    text: {
-      default: '#f0f3f6',
-      accent: '#58a6ff',
-      attention: '#d29922',
-      secondary: '#a371f7',
-      danger: '#f85149',
-    },
+    text,
   },
   spacing: (size: number) => `${size * 8}px`,
   typography: {

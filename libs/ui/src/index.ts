@@ -1,3 +1,5 @@
+export * from './lib/atoms/table-cell/table-cell';
+export * from './lib/atoms/page/page';
 export * from './lib/atoms/text/text';
 export * from './lib/atoms/separator/separator';
 export * from './lib/atoms/card/card';

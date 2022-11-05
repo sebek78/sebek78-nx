@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Menu } from '../menu/menu';
 
 /* eslint-disable-next-line */
 export interface DashboardProps {}
@@ -8,5 +9,10 @@ const StyledDashboard = styled.div`
 `;
 
 export function Dashboard(props: DashboardProps) {
-  return <StyledDashboard>Strona główna</StyledDashboard>;
+  return (
+    <StyledDashboard>
+      <Menu />
+      Strona główna
+    </StyledDashboard>
+  );
 }
