@@ -29,6 +29,8 @@ export const theme: DefaultTheme = {
       /* colors */
       accentSubtle: 'rgba(56,139,253,0.15)',
       accentEmphasis: '#1f6feb',
+      attentionSubtle: 'rgba(187,128,9,0.15)',
+      attentionEmphasis: '#9e6a03',
       dangerSubtle: ' rgba(248,81,73,0.15)',
       dangerEmphasis: '#da3633',
       successSubtle: 'rgba(46,160,67,0.15)',

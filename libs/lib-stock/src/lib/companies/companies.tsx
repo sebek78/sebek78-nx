@@ -1,29 +1,30 @@
 import { useCompanies } from '@sebek78-nx/data-access';
-import { Flexbox } from '@sebek78-nx/ui';
 import { Menu } from '../menu/menu';
-import { Page, TableCell } from '@sebek78-nx/ui';
+import {
+  ErrorInfo,
+  Flexbox,
+  Loader,
+  Page,
+  TableCell,
+  TableRow,
+  Table,
+} from '@sebek78-nx/ui';
+import { companyHeader } from './constatnts';
 
 export function Companies() {
   const { data: companies, isLoading, isError, error } = useCompanies();
 
   console.log(companies);
 
-  if (isLoading) {
-    return <span>Loading...</span>;
-  }
-  if (isError) {
-    return <span>Error: {error?.message}</span>;
-  }
-
-  // TODO: table components
-
   return (
     <Page>
       <Menu />
-      <Flexbox>
-        <table>
+      <Flexbox direction="column">
+        {isLoading && <Loader />}
+        {isError && <ErrorInfo error={error} />}
+        <Table headerData={companyHeader}>
           {companies?.map((company) => (
-            <tr key={company.id}>
+            <TableRow key={company.id}>
               <TableCell data={company.name} />
               <TableCell data={company.marketValue} />
               <TableCell
@@ -33,9 +34,9 @@ export function Companies() {
               <TableCell
                 data={new Date(company.updated).toLocaleDateString('pl')}
               />
-            </tr>
+            </TableRow>
           ))}
-        </table>
+        </Table>
       </Flexbox>
     </Page>
   );

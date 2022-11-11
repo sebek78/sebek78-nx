@@ -9,7 +9,7 @@ export interface TableCellProps {
 const StyledTableCell = styled.td<{ color?: ThemeTextColorKeys }>`
   color: ${({ theme, color }) =>
     color ? theme.palette.text[color] : theme.palette.text.default};
-  background-color: ${({ theme }) => theme.palette.background.subtle};
+  background-color: inherit;
   padding: ${({ theme }) => `${theme.spacing(1)} ${theme.spacing(2)}`};
   text-align: center;
 `;
