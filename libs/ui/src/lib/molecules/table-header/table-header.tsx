@@ -1,16 +1,19 @@
 import { TableHeaderCell, TableRow } from '@sebek78-nx/ui';
 import { TableHeaderData } from '@sebek78-nx/types';
 
-export interface TableHeaderProps {
-  headerData: TableHeaderData[];
+export interface TableHeaderProps<T> {
+  header: TableHeaderData<T>[];
 }
 
-export function TableHeader({ headerData }: TableHeaderProps) {
+export function TableHeader<T>({ header }: TableHeaderProps<T>) {
+  // TODO: add units row
   return (
-    <TableRow>
-      {headerData.map((th: TableHeaderData) => (
-        <TableHeaderCell key={th.name} data={th.label} />
-      ))}
-    </TableRow>
+    <thead>
+      <TableRow>
+        {header.map((th: TableHeaderData<T>) => (
+          <TableHeaderCell key={th.label} data={th.label} />
+        ))}
+      </TableRow>
+    </thead>
   );
 }

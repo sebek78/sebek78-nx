@@ -1,3 +1,4 @@
+export * from './lib/molecules/table-content/table-content';
 export * from './lib/molecules/table-header/table-header';
 export * from './lib/atoms/table-header-cell/table-header-cell';
 export * from './lib/molecules/table/table';

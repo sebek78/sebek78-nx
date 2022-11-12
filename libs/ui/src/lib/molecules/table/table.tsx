@@ -1,11 +1,10 @@
-import { ReactNode } from 'react';
 import styled from 'styled-components';
-import { TableHeader } from '@sebek78-nx/ui';
+import { TableContent, TableHeader } from '@sebek78-nx/ui';
 import { TableHeaderData } from '@sebek78-nx/types';
 
-export interface TableProps {
-  children: ReactNode;
-  headerData: TableHeaderData[];
+export interface TableProps<T> {
+  data?: T[];
+  header: TableHeaderData<T>[];
 }
 
 const StyledTable = styled.table`
@@ -14,13 +13,11 @@ const StyledTable = styled.table`
 
 // TODO: move table to ui/organisms
 
-export function Table({ children, headerData }: TableProps) {
+export function Table<T>({ data, header }: TableProps<T>) {
   return (
     <StyledTable>
-      <thead>
-        <TableHeader headerData={headerData} />
-      </thead>
-      <tbody>{children}</tbody>
+      <TableHeader header={header} />
+      <TableContent data={data} header={header} />
     </StyledTable>
   );
 }
