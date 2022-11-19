@@ -1,15 +1,5 @@
 import { ModifiedCompany, TableHeaderData } from '@sebek78-nx/types';
-
-// TODO: move to util library
-export function cellFormatter<T>(value: T[keyof T]) {
-  if (value instanceof Date) {
-    return new Date(value).toLocaleDateString('pl');
-  }
-  if (typeof value === 'string') return String(value);
-  if (typeof value === 'number') return Number(value);
-
-  return '';
-}
+import { colorFormatter } from '@sebek78-nx/util';
 
 export const companyHeader: TableHeaderData<ModifiedCompany>[] = [
   {
@@ -19,10 +9,13 @@ export const companyHeader: TableHeaderData<ModifiedCompany>[] = [
   {
     name: 'marketValue',
     label: 'Kapitalizacja',
+    unit: 'mld PLN',
   },
   {
     name: 'treasury',
     label: 'Skarb',
+    unit: '%',
+    colorFormatter: colorFormatter,
   },
   {
     name: 'updatedDate',

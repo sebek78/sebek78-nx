@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export interface TableHeaderCellProps {
-  data: string;
+  data?: string;
+  rowSpan?: number;
 }
 
 const StyledTableHeaderCell = styled.th`
@@ -11,6 +12,11 @@ const StyledTableHeaderCell = styled.th`
   text-align: center;
 `;
 
-export function TableHeaderCell({ data }: TableHeaderCellProps) {
-  return <StyledTableHeaderCell>{data}</StyledTableHeaderCell>;
+export function TableHeaderCell({
+  data = '',
+  rowSpan = 1,
+}: TableHeaderCellProps) {
+  return (
+    <StyledTableHeaderCell rowSpan={rowSpan}>{data}</StyledTableHeaderCell>
+  );
 }

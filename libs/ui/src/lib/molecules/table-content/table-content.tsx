@@ -1,6 +1,6 @@
 import { TableHeaderData } from '@sebek78-nx/types';
 import { TableCell, TableRow } from '@sebek78-nx/ui';
-import { cellFormatter } from 'libs/lib-stock/src/lib/companies/constatnts';
+import { valueFormatter } from '@sebek78-nx/util';
 
 export interface TableContentProps<T> {
   data?: T[];
@@ -10,10 +10,17 @@ export interface TableContentProps<T> {
 export function TableContent<T>({ data, header }: TableContentProps<T>) {
   return (
     <tbody>
-      {data?.map((data) => (
-        <TableRow>
+      {data?.map((data, idx) => (
+        <TableRow key={idx}>
           {header.map((headerData) => (
-            <TableCell data={cellFormatter(data[headerData.name])} />
+            <TableCell
+              key={headerData.label}
+              data={valueFormatter(data[headerData.name])}
+              color={
+                headerData?.colorFormatter &&
+                headerData?.colorFormatter(data[headerData.name])
+              }
+            />
           ))}
         </TableRow>
       ))}
