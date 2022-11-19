@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Menu } from '../menu/menu';
+import { Menu } from '../../menu/menu';
 
 /* eslint-disable-next-line */
 export interface DashboardProps {}

@@ -1,5 +1,5 @@
 import { useCompanies } from '@sebek78-nx/data-access';
-import { Menu } from '../menu/menu';
+import { Menu } from '../../menu/menu';
 import { ErrorInfo, Flexbox, Loader, Page, Table } from '@sebek78-nx/ui';
 import { companyHeader } from './constatnts';
 

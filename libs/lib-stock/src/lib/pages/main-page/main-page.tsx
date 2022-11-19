@@ -1,9 +1,9 @@
 import { Dispatch, memo, SetStateAction } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { UserProfile } from '../user-profile/user-profile';
+import { UserProfile } from '../../templates/user-profile/user-profile';
 import { User } from '@sebek78-nx/types';
-import { Dashboard } from '../dashboard/dashboard';
-import { Companies } from '../companies/companies';
+import { Dashboard } from '../../templates/dashboard/dashboard';
+import { Companies } from '../../templates/companies/companies';
 
 interface MainPageProps {
   user: User;

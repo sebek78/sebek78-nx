@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { SuccessResponse } from '@sebek78-nx/types';
 import { initialUser, REFRESH_TOKEN_TIME } from '@sebek78-nx/util';
 import { Header } from '../header/header';
-import { Homepage } from '../homepage/homepage';
-import { MainPage } from '../main-page/main-page';
-import { AdminPage } from '../admin-page/admin-page';
+import { Homepage } from '../pages/homepage/homepage';
+import { MainPage } from '../pages/main-page/main-page';
+import { AdminPage } from '../pages/admin-page/admin-page';
 import { getRefreshToken } from '@sebek78-nx/data-access';
 
 const StyledAppRoot = styled.div`
