@@ -1,3 +1,4 @@
+export * from './lib/hooks/use-companies/use-companies';
 export * from './lib/hooks/use-delete-user/use-delete-user';
 export * from './lib/hooks/use-change-password/use-change-password';
 export * from './lib/hooks/use-register/use-register';

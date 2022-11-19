@@ -9,8 +9,8 @@ import {
   Text,
 } from '@sebek78-nx/ui';
 import { Dispatch, SetStateAction, useState } from 'react';
-import { ChangePasswordForm } from '../forms/change-password-form/change-password-form';
-import { DeleteUserForm } from '../forms/delete-user-form/delete-user-form';
+import { ChangePasswordForm } from '../../forms/change-password-form/change-password-form';
+import { DeleteUserForm } from '../../forms/delete-user-form/delete-user-form';
 
 export interface UserProfileProps {
   user: User;

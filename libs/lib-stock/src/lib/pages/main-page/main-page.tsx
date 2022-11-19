@@ -1,8 +1,9 @@
 import { Dispatch, memo, SetStateAction } from 'react';
-import { useApiQuery } from '@sebek78-nx/data-access';
 import { Routes, Route } from 'react-router-dom';
-import { UserProfile } from '../user-profile/user-profile';
+import { UserProfile } from '../../templates/user-profile/user-profile';
 import { User } from '@sebek78-nx/types';
+import { Dashboard } from '../../templates/dashboard/dashboard';
+import { Companies } from '../../templates/companies/companies';
 
 interface MainPageProps {
   user: User;
@@ -13,21 +14,15 @@ export const MainPage = memo(function MainPage({
   user,
   setUser,
 }: MainPageProps) {
-  const { data, error, isError, isLoading, isSuccess } = useApiQuery(
-    'testData',
-    '/'
-  );
-
-  console.log(new Date().toLocaleTimeString(), data);
-
   return (
     <main>
       <Routes>
-        <Route path="/" element={<h1>Main Page</h1>} />
+        <Route path="/" element={<Dashboard />} />
         <Route
           path="profile"
           element={<UserProfile user={user} setUser={setUser} />}
         />
+        <Route path="companies" element={<Companies />} />
       </Routes>
     </main>
   );
