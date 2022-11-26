@@ -12,20 +12,6 @@ enum Role {
   ADMIN
 }
 
-model Country {
-  id   Int    @id @default(autoincrement())
-  name String @unique
-
-  @@map("countries")
-}
-
-model Province {
-  id   Int    @id @default(autoincrement())
-  name String @unique
-
-  @@map("provinces")
-}
-
 model User {
   id               Int       @id @default(autoincrement())
   username         String    @unique
@@ -57,9 +43,32 @@ model Company {
   sectorId    Int      @map("sector_id")
   isin        String   @unique
   treasury    Float // percent
-  marketValue Float    @map("market_value") // million PLN
+  marketValue Float    @map("market_value") // billion PLN
   updated     DateTime @default(now())
   Sector      Sector   @relation(fields: [sectorId], references: [id])
+  Report      Report[]
 
   @@map("companies")
+}
+
+model Report {
+  id           Int       @id @default(autoincrement())
+  companyId    Int       @map("company_id")
+  group        Int // dividends: 0 none, 1 irregular, 2 regular,  3 WIG30 index
+  year         Int
+  quarter      Int
+  date         DateTime
+  sharesAmount BigInt    @map("shares_amount")
+  price        Float // currency: PLN
+  marketValue  Float // billion PLN
+  pb           Float // Price-to-book value (P/B)
+  pe           Float // Price-earnings relative (P/E)
+  ros          Float // Return on (net) Sales (ROS)
+  roa          Float // Return on Assets (ROA)
+  roe          Float // Return on Equity (ROE)
+  z_score      Float?    @map("ZScore") // Altman Z"-Score for emerging markets
+  nextUpdate   DateTime? // date of the next report
+  Company      Company   @relation(fields: [companyId], references: [id])
+
+  @@map("reports")
 }

@@ -15,7 +15,21 @@ export class CompaniesService {
 
   async findAll() {
     try {
-      return this.prisma.company.findMany();
+      const companies = await this.prisma.company.findMany();
+      const reports = await this.prisma.report.findMany({
+        distinct: ['companyId'],
+        orderBy: {
+          date: 'desc',
+        },
+      });
+
+      return {
+        companies,
+        reports: reports.map((report) => ({
+          ...report,
+          sharesAmount: report.sharesAmount.toString(), // to avoid JSON stringify BigInt error
+        })),
+      };
     } catch (error: unknown) {
       throw new HttpException(
         'Błąd pobierania firm',

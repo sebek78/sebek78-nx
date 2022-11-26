@@ -14,6 +14,7 @@ const StyledTable = styled.table`
 // TODO: move table to ui/organisms
 
 export function Table<T>({ data, header }: TableProps<T>) {
+  console.log(data);
   return (
     <StyledTable>
       <TableHeader header={header} />
