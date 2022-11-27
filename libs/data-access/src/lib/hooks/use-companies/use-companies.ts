@@ -1,53 +1,72 @@
-import { Company, Report } from '@prisma/client';
-import { ModifiedCompany, ModifiedReport } from '@sebek78-nx/types';
+import { Company } from '@prisma/client';
+import {
+  CompanyAndReport,
+  ModifiedCompany,
+  ModifiedReport,
+} from '@sebek78-nx/types';
 import { AxiosError } from 'axios';
 import { useApiQuery } from '../use-api-query/use-api-query';
 
 export interface UseCompanies {
-  data: any[] | undefined;
+  data: CompanyAndReport[] | undefined;
   error: AxiosError | null;
   isError: boolean;
   isLoading: boolean;
   isSuccess: boolean;
 }
 
-// TODO: arguments: CompanyAndReport type
-function sortByMarketValueDesc(a: any, b: any) {
+interface CompaniesDTO {
+  companies: Company[];
+  reports: ModifiedReport[];
+}
+
+function sortByMarketValueDesc(a: CompanyAndReport, b: CompanyAndReport) {
   return b.marketValue - a.marketValue;
 }
 
-// function modifyReport(report: ModifiedReport): Report {
-//   return {
-//     ...report,
-//     sharesAmount: BigInt(report.sharesAmount),
-//   };
-// }
+function modifyCompany(company: Company): ModifiedCompany {
+  return {
+    ...company,
+    /* Prisma returns ISOstring for "updated" key instead of Date */
+    updatedDate: new Date(company.updated.toString()),
+  };
+}
 
-// TODO: return CompanyAndReport type
 function mergeData(companies?: Company[], reports?: ModifiedReport[]) {
   if (!companies || !reports) return [];
 
-  return companies
-    .map((company) => {
+  const modifiedCompanies = companies.map(modifyCompany);
+
+  const companiesAndLastReports = modifiedCompanies.map(
+    (company: ModifiedCompany): CompanyAndReport => {
       const report = reports.find((report) => report.companyId === company.id);
 
       return {
         ...company,
-        /* Prisma returns ISOstring for "updated" key instead of Date */
-        updatedDate: new Date(company.updated.toString()),
-        marketValue: report?.marketValue || -1,
-        ...report,
+        group: report ? report.group : -1,
+        marketValue: report?.marketValue || company.marketValue,
+        quarter: report ? `${report.year} Q${report.quarter}` : undefined,
+        date: report ? new Date(report.date) : company.updatedDate,
+        pb: report?.pb,
+        pe: report?.pe,
+        ros: report?.ros,
+        roa: report?.roa,
+        roe: report?.roe,
+        zScore: report && report.zScore !== null ? report.zScore : undefined,
+        nextUpdate:
+          report && report.nextUpdate !== null
+            ? new Date(report.nextUpdate)
+            : undefined,
       };
-    })
-    .sort(sortByMarketValueDesc);
-  // .map(modifyCompany);
+    }
+  );
+
+  return companiesAndLastReports.sort(sortByMarketValueDesc);
 }
 
 export function useCompanies(): UseCompanies {
-  const { data, error, isError, isLoading, isSuccess } = useApiQuery<any>(
-    'companiesData',
-    '/companies'
-  );
+  const { data, error, isError, isLoading, isSuccess } =
+    useApiQuery<CompaniesDTO>('companiesData', '/companies');
 
   return {
     data: mergeData(data?.companies, data?.reports),

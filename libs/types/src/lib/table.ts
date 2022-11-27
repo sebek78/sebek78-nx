@@ -1,6 +1,8 @@
 import { Company, Report } from '@prisma/client';
 import { ThemeTextColorKeys } from './theme';
 
+export type ColorFormatter = <T>(value: T[keyof T]) => ThemeTextColorKeys;
+
 export interface TableHeaderData<T> {
   name: keyof T;
   label: string;
@@ -15,20 +17,19 @@ export type ModifiedCompany = Company & {
 };
 
 export type CompanyAndReport = ModifiedCompany & {
-  year: number;
-  quarter: number;
-  date: string;
-  pb: number;
-  pe: number;
-  ros: number;
-  roa: number;
-  roe: number;
-  z_score: number;
-  nextUpdate?: string;
+  group: number;
+  marketValue: number;
+  date: Date;
+  quarter?: string;
+  pb?: number;
+  pe?: number;
+  ros?: number;
+  roa?: number;
+  roe?: number;
+  zScore?: number;
+  nextUpdate?: Date;
 };
 
 export type ModifiedReport = Report & {
   sharesAmount: string;
 };
-
-export type ColorFormatter = <T>(value: T[keyof T]) => ThemeTextColorKeys;

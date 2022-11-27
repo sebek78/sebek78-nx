@@ -18,20 +18,12 @@ export const companyHeader: TableHeaderData<CompanyAndReport>[] = [
     colorFormatter: colorFormatter,
   },
   {
-    name: 'updatedDate',
+    name: 'date',
     label: 'Aktualizacja',
-  },
-  {
-    name: 'year',
-    label: 'Rok',
   },
   {
     name: 'quarter',
     label: 'Kwartał',
-  },
-  {
-    name: 'date',
-    label: 'Data raportu',
   },
   {
     name: 'pb',
@@ -44,17 +36,20 @@ export const companyHeader: TableHeaderData<CompanyAndReport>[] = [
   {
     name: 'ros',
     label: 'ROS',
+    unit: '%',
   },
   {
     name: 'roa',
     label: 'ROA',
+    unit: '%',
   },
   {
     name: 'roe',
     label: 'ROE',
+    unit: '%',
   },
   {
-    name: 'z_score',
+    name: 'zScore',
     label: 'Z Score',
   },
   {

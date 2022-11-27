@@ -66,7 +66,7 @@ model Report {
   ros          Float // Return on (net) Sales (ROS)
   roa          Float // Return on Assets (ROA)
   roe          Float // Return on Equity (ROE)
-  z_score      Float?    @map("ZScore") // Altman Z"-Score for emerging markets
+  zScore       Float?    @map("z_score") // Altman Z"-Score for emerging markets
   nextUpdate   DateTime? // date of the next report
   Company      Company   @relation(fields: [companyId], references: [id])
 
