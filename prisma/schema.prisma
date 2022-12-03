@@ -67,7 +67,7 @@ model Report {
   roa          Float // Return on Assets (ROA)
   roe          Float // Return on Equity (ROE)
   zScore       Float?    @map("z_score") // Altman Z"-Score for emerging markets
-  nextUpdate   DateTime? // date of the next report
+  nextUpdate   DateTime? @map("next_update") // date of the next report
   Company      Company   @relation(fields: [companyId], references: [id])
 
   @@map("reports")

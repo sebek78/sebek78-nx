@@ -11,10 +11,7 @@ const StyledTable = styled.table`
   margin-top: 32px;
 `;
 
-// TODO: move table to ui/organisms
-
 export function Table<T>({ data, header }: TableProps<T>) {
-  console.log(data);
   return (
     <StyledTable>
       <TableHeader header={header} />

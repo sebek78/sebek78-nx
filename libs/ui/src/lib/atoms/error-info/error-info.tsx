@@ -1,8 +1,9 @@
+import { ApiError } from '@sebek78-nx/types';
 import { AxiosError } from 'axios';
 import styled from 'styled-components';
 
 export interface ErrorInfoProps {
-  error: AxiosError | null;
+  error: AxiosError<ApiError> | null;
 }
 
 const StyledErrorInfo = styled.div`
@@ -13,7 +14,7 @@ const StyledErrorInfo = styled.div`
 export function ErrorInfo({ error }: ErrorInfoProps) {
   return (
     <StyledErrorInfo>{`Błąd: ${
-      error?.message ?? 'Nieznany błąd'
+      error?.response?.data?.message ?? 'Nieznany błąd'
     }`}</StyledErrorInfo>
   );
 }

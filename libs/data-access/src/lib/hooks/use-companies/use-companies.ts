@@ -1,5 +1,6 @@
 import { Company } from '@prisma/client';
 import {
+  ApiError,
   CompanyAndReport,
   ModifiedCompany,
   ModifiedReport,
@@ -9,7 +10,7 @@ import { useApiQuery } from '../use-api-query/use-api-query';
 
 export interface UseCompanies {
   data: CompanyAndReport[] | undefined;
-  error: AxiosError | null;
+  error: AxiosError<ApiError> | null;
   isError: boolean;
   isLoading: boolean;
   isSuccess: boolean;
