@@ -15,10 +15,18 @@ export function TableContent<T>({ data, header }: TableContentProps<T>) {
           {header.map((headerData) => (
             <TableCell
               key={headerData.label}
-              data={valueFormatter(data[headerData.name])}
+              data={valueFormatter(
+                data[headerData.name],
+                headerData.customFormatter
+              )}
               color={
                 headerData?.colorFormatter &&
                 headerData?.colorFormatter(data[headerData.name])
+              }
+              bold={
+                headerData.bold ||
+                (headerData?.boldFormatter &&
+                  headerData?.boldFormatter(data[headerData.name]))
               }
             />
           ))}

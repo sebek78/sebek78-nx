@@ -11,6 +11,8 @@ const text: ThemeTextColor = {
   attention: '#d29922',
   secondary: '#a371f7',
   danger: '#f85149',
+  success: '#3fb950',
+  successEmphasis: '#238636',
 };
 
 export const theme: DefaultTheme = {

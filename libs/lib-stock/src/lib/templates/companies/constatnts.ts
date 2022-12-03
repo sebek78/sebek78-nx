@@ -1,5 +1,12 @@
 import { TableHeaderData, CompanyAndReport } from '@sebek78-nx/types';
-import { colorFormatter } from '@sebek78-nx/util';
+import {
+  colorFormatterTh,
+  colorFormatterPE,
+  colorFormatterThSuccess,
+  boldFormatter,
+  colorFormatterZS,
+  valueFormatterZS,
+} from '@sebek78-nx/util';
 
 export const companyHeader: TableHeaderData<CompanyAndReport>[] = [
   {
@@ -15,7 +22,7 @@ export const companyHeader: TableHeaderData<CompanyAndReport>[] = [
     name: 'treasury',
     label: 'Skarb',
     unit: '%',
-    colorFormatter: colorFormatter,
+    colorFormatter: colorFormatterTh,
   },
   {
     name: 'date',
@@ -32,11 +39,14 @@ export const companyHeader: TableHeaderData<CompanyAndReport>[] = [
   {
     name: 'pe',
     label: 'C/Z',
+    colorFormatter: colorFormatterPE,
+    boldFormatter: (value) => boldFormatter(value, 5, 20),
   },
   {
     name: 'ros',
     label: 'ROS',
     unit: '%',
+    colorFormatter: (value) => colorFormatterThSuccess(value, 15),
   },
   {
     name: 'roa',
@@ -47,10 +57,13 @@ export const companyHeader: TableHeaderData<CompanyAndReport>[] = [
     name: 'roe',
     label: 'ROE',
     unit: '%',
+    bold: true,
   },
   {
     name: 'zScore',
     label: 'Z Score',
+    colorFormatter: colorFormatterZS,
+    customFormatter: valueFormatterZS,
   },
   {
     name: 'nextUpdate',

@@ -3,4 +3,6 @@ export type ThemeTextColorKeys =
   | 'attention'
   | 'danger'
   | 'default'
-  | 'secondary';
+  | 'secondary'
+  | 'success'
+  | 'successEmphasis';

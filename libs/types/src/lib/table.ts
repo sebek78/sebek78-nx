@@ -2,12 +2,21 @@ import { Company, Report } from '@prisma/client';
 import { ThemeTextColorKeys } from './theme';
 
 export type ColorFormatter = <T>(value: T[keyof T]) => ThemeTextColorKeys;
+export type BoldFormatter = <T>(
+  value: T[keyof T],
+  min?: number,
+  max?: number
+) => boolean;
+export type DataFormatter = <T>(value: T[keyof T]) => string;
 
 export interface TableHeaderData<T> {
   name: keyof T;
   label: string;
   unit?: string;
+  bold?: boolean;
   colorFormatter?: ColorFormatter;
+  boldFormatter?: BoldFormatter;
+  customFormatter?: DataFormatter;
 }
 
 export type ModifiedCompany = Company & {
