@@ -1,3 +1,4 @@
+export * from './lib/templates/admin-dashboard/admin-dashboard';
 export * from './lib/forms/delete-user-form/delete-user-form';
 export * from './lib/forms/change-password-form/change-password-form';
 export * from './lib/templates/user-profile/user-profile';

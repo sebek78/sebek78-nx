@@ -1,14 +1,15 @@
 import { memo } from 'react';
-import styled from 'styled-components';
-
-const StyledAdminPage = styled.div`
-  color: red;
-`;
+import { Routes, Route } from 'react-router-dom';
+import { Companies } from '../../templates/companies/companies';
+import { AdminDashboard } from '../../templates/admin-dashboard/admin-dashboard';
 
 export const AdminPage = memo(function AdminPage() {
   return (
-    <StyledAdminPage>
-      <h1>Welcome to AdminPage!</h1>
-    </StyledAdminPage>
+    <main>
+      <Routes>
+        <Route path="/" element={<AdminDashboard />} />
+        <Route path="companies" element={<Companies />} />
+      </Routes>
+    </main>
   );
 });

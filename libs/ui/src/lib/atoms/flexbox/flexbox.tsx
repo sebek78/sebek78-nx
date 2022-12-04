@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import styled from 'styled-components';
 
 type FlexDirection = 'row' | 'column';
-type JustifyContent = 'center' | 'space-between';
+type JustifyContent = 'center' | 'space-between' | 'flex-start';
 type AlignItems = 'center';
 type FlexWrap = 'nowrap' | 'wrap';
 
