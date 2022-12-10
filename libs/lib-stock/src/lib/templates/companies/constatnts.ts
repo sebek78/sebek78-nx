@@ -6,6 +6,7 @@ import {
   boldFormatter,
   colorFormatterZS,
   valueFormatterZS,
+  valueFormatter2p,
 } from '@sebek78-nx/util';
 
 export const companyHeader: TableHeaderData<CompanyAndReport>[] = [
@@ -17,11 +18,13 @@ export const companyHeader: TableHeaderData<CompanyAndReport>[] = [
     name: 'marketValue',
     label: 'Kapitalizacja',
     unit: 'mld PLN',
+    customFormatter: (value) => valueFormatter2p(value),
   },
   {
     name: 'treasury',
     label: 'Skarb',
     unit: '%',
+    customFormatter: (value) => valueFormatter2p(value),
     colorFormatter: colorFormatterTh,
   },
   {

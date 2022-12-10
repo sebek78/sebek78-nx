@@ -1,3 +1,5 @@
+export * from './lib/formatters/colors';
+export * from './lib/formatters/values';
 export * from './lib/theme/global-style';
 export * from './lib/theme/theme';
 export * from './lib/constants';
