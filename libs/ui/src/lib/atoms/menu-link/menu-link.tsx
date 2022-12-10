@@ -9,9 +9,14 @@ export interface MenuLinkProps {
 
 const StyledMenuLink = styled(Link)`
   & {
+    height: 38px;
     color: ${(props) => props.theme.palette.text.accent};
     text-decoration: none;
-    padding-right: ${(props) => props.theme.spacing(2)};
+    padding: 0 ${(props) => props.theme.spacing(1)};
+  }
+  &:hover {
+    color: ${({ theme }) => theme.palette.text.accentEmphasis};
+    background-color: ${({ theme }) => theme.palette.background.inset};
   }
 `;
 

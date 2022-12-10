@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 type FlexDirection = 'row' | 'column';
 type JustifyContent = 'center' | 'space-between' | 'flex-start';
-type AlignItems = 'center';
+type AlignItems = 'center' | 'flex-start';
 type FlexWrap = 'nowrap' | 'wrap';
 
 export interface FlexboxProps {

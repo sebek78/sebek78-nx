@@ -8,6 +8,7 @@ type ThemeTextColor = {
 const text: ThemeTextColor = {
   default: '#f0f3f6',
   accent: '#58a6ff',
+  accentEmphasis: '#1f6feb',
   attention: '#d29922',
   secondary: '#a371f7',
   danger: '#f85149',

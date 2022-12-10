@@ -11,7 +11,6 @@ const StyledMenuItem = styled.li`
   &:hover {
     background-color: ${({ theme }) => theme.palette.background.inset};
   }
-  padding-left: ${({ theme }) => theme.spacing(1)};
 `;
 
 export function MenuItem({ to, label }: MenuItemProps) {

@@ -11,6 +11,7 @@ const StyledSubmenuList = styled.div`
   position: relative;
   top: -1px;
   list-style-type: none;
+  border: 2px solid ${({ theme }) => theme.palette.border.default};
 `;
 
 const isMenuItemVisible = (to: string) => document.location.pathname !== to;

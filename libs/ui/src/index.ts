@@ -1,3 +1,5 @@
+export * from './lib/atoms/styled-menu/styled-menu';
+export * from './lib/atoms/submenu-label/submenu-label';
 export * from './lib/atoms/menu-link/menu-link';
 export * from './lib/organisms/sub-menu/sub-menu';
 export * from './lib/molecules/sub-menu-list/sub-menu-list';

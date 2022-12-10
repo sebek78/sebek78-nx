@@ -1,6 +1,7 @@
 import { MenuItemType, UserRole } from '@sebek78-nx/types';
 import { useState } from 'react';
 import styled from 'styled-components';
+import { SubmenuLabel } from '../../atoms/submenu-label/submenu-label';
 import { SubmenuList } from '../../molecules/sub-menu-list/sub-menu-list';
 
 export interface SubMenuProps {
@@ -16,11 +17,18 @@ const StyledSubMenu = styled.div`
 
 export function Submenu({ label, role, menuItems }: SubMenuProps) {
   const [openSubmenu, setOpenSubmenu] = useState(false);
+
   const handleOpenSubmenu = () => setOpenSubmenu(!openSubmenu);
+  const hideSubmenuList = () => setOpenSubmenu(false);
+  const openSubmenuList = () => setOpenSubmenu(true);
 
   return (
-    <StyledSubMenu>
-      <div onClick={handleOpenSubmenu}>{label}</div>
+    <StyledSubMenu onMouseLeave={hideSubmenuList}>
+      <SubmenuLabel
+        handleOpenSubmenu={handleOpenSubmenu}
+        openSubmenuList={openSubmenuList}
+        label={label}
+      />
       {openSubmenu && <SubmenuList role={role} menuItems={menuItems} />}
     </StyledSubMenu>
   );
